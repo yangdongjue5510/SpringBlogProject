@@ -28,13 +28,7 @@ public class BlogDAO {
             stmt = conn.prepareStatement(GET_BLOG_LIST);
             rs = stmt.executeQuery();
             while (rs.next()){
-                BlogVO blog = new BlogVO();
-                blog.setBlogId(rs.getInt("BLOG_ID"));
-                blog.setUserId(rs.getInt("USER_ID"));
-                blog.setStatus(rs.getString("STATUS"));
-                blog.setTag(rs.getString("TAG"));
-                blog.setTitle(rs.getString("TITLE"));
-                blog.setCntDisplayPost(rs.getInt("CNT_DISPLAY_POST"));
+                BlogVO blog = setBlogVO();
                 list.add(blog);
             }
         } catch (SQLException throwables) {
@@ -45,5 +39,14 @@ public class BlogDAO {
         return list;
     }
 
-
+    public BlogVO setBlogVO() throws SQLException {
+        BlogVO blog = new BlogVO();
+        blog.setBlogId(rs.getInt("BLOG_ID"));
+        blog.setUserId(rs.getInt("USER_ID"));
+        blog.setStatus(rs.getString("STATUS"));
+        blog.setTag(rs.getString("TAG"));
+        blog.setTitle(rs.getString("TITLE"));
+        blog.setCntDisplayPost(rs.getInt("CNT_DISPLAY_POST"));
+        return blog;
+    }
 }

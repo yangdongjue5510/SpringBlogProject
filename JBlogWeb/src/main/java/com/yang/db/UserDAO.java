@@ -30,18 +30,23 @@ public class UserDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()){
-                user = new UserVO();
-                user.setId(rs.getString("ID"));
-                user.setUserId(rs.getInt("USER_ID"));
-                user.setPassword(rs.getString("PASSWORD"));
-                user.setRole(rs.getString("ROLE"));
-                user.setUserName(rs.getString("USER_NAME"));
+                user = setUserVO();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
             JDBCUtil.close(rs, stmt, conn);
         }
+        return user;
+    }
+
+    public UserVO setUserVO() throws SQLException {
+        UserVO user = new UserVO();
+        user.setId(rs.getString("ID"));
+        user.setUserId(rs.getInt("USER_ID"));
+        user.setPassword(rs.getString("PASSWORD"));
+        user.setRole(rs.getString("ROLE"));
+        user.setUserName(rs.getString("USER_NAME"));
         return user;
     }
 
