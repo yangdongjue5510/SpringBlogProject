@@ -16,7 +16,7 @@ public class BlogApiController {
 
     @RequestMapping("/")
     public String index(Model model){
-        List<BlogVO> list = blogService.getBlog();
+        List<BlogVO> list = blogService.getBlogList();
         model.addAttribute("blogList", list);
         return "forward:/indexView";
     }

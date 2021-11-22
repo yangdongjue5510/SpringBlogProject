@@ -26,8 +26,12 @@
                     <c:if test="${user == null }">
                         <a href="loginView"><b>로그인</b></a>&nbsp;&nbsp;
                     </c:if>
-                    <c:if test="${user != null }">
+
+                    <c:if test="${user != null && blog == null}">
                         <a href="#"><b>블로그등록</b></a>&nbsp;&nbsp;
+                    </c:if>
+
+                    <c:if test="${user != null && blog != null}">
                         <a href="#"><b>내 블로그로 가기</b></a>
                     </c:if>
                 </td>

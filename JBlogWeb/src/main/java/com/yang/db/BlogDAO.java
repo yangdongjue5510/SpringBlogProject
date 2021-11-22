@@ -2,6 +2,7 @@ package com.yang.db;
 
 import com.yang.common.JDBCUtil;
 import com.yang.domain.BlogVO;
+import com.yang.domain.UserVO;
 import com.yang.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,7 @@ public class BlogDAO {
     private ResultSet rs;
 
     private final String GET_BLOG_LIST = "SELECT * FROM BLOG";
+    private final String GET_BLOG_BY_USER_ID = "SELECT * FROM BLOG WHERE USER_ID = ?";
 
     public List<BlogVO> getBlogList(){
         List<BlogVO> list = new ArrayList<>();
@@ -37,6 +39,25 @@ public class BlogDAO {
             JDBCUtil.close(rs, stmt, conn);
         }
         return list;
+    }
+
+    public BlogVO getBlog(UserVO vo){
+        BlogVO blog = null;
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(GET_BLOG_BY_USER_ID);
+            stmt.setInt(1, vo.getUserId());
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                blog = setBlogVO();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+        return blog;
     }
 
     public BlogVO setBlogVO() throws SQLException {

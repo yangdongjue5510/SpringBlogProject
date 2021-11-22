@@ -30,8 +30,15 @@ class JBlogWebApplicationTests {
 
     @Test
     void getBlogList() {
-        List<BlogVO> list = blogService.getBlog();
+        List<BlogVO> list = blogService.getBlogList();
         assertEquals(1, list.size());
     }
 
+    @Test
+    void getBlog() {
+        UserVO user = new UserVO();
+        user.setUserId(1);
+        BlogVO blog = blogService.getBlog(user);
+        assertNotNull(blog);
+    }
 }

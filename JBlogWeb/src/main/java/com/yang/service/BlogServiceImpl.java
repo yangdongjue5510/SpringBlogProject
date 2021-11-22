@@ -2,6 +2,7 @@ package com.yang.service;
 
 import com.yang.db.BlogDAO;
 import com.yang.domain.BlogVO;
+import com.yang.domain.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,13 @@ public class BlogServiceImpl implements BlogService{
 
 
     @Override
-    public List<BlogVO> getBlog() {
+    public List<BlogVO> getBlogList() {
         List<BlogVO> list = blogDAO.getBlogList();
         return list;
+    }
+
+    @Override
+    public BlogVO getBlog(UserVO vo) {
+        return blogDAO.getBlog(vo);
     }
 }
