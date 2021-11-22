@@ -23,16 +23,18 @@
             <tr>
                 <td width="30%" height="30">&nbsp;</td>
                 <td width="70%" colspan="2">
-                    <c:if test="${user == null }">
+                    <c:if test="${user == null}">
                         <a href="loginView"><b>로그인</b></a>&nbsp;&nbsp;
                     </c:if>
 
-                    <c:if test="${user != null && blog == null}">
-                        <a href="#"><b>블로그등록</b></a>&nbsp;&nbsp;
-                    </c:if>
-
-                    <c:if test="${user != null && blog != null}">
-                        <a href="#"><b>내 블로그로 가기</b></a>
+                    <c:if test="${user != null}">
+                        <a href="/logout"><b>로그아웃</b></a>
+                        <c:if test="${blog == null}">
+                            <a href="#"><b>블로그등록</b></a>
+                        </c:if>
+                        <c:if test="${blog != null}">
+                            <a href="#"><b>내 블로그로 가기</b></a>
+                        </c:if>
                     </c:if>
                 </td>
             </tr>

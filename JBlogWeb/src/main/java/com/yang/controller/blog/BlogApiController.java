@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,5 +20,11 @@ public class BlogApiController {
         List<BlogVO> list = blogService.getBlogList();
         model.addAttribute("blogList", list);
         return "forward:/indexView";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "forward:/";
     }
 }
