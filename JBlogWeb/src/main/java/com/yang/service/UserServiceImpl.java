@@ -16,4 +16,12 @@ public class UserServiceImpl implements UserService {
     public List<UserVO> getUserList() {
         return userDAO.userVOList();
     }
+
+    @Override
+    public UserVO getUser(String id, String password) {
+        UserVO vo = new UserVO();
+        vo.setId(id);
+        vo.setPassword(password);
+        return userDAO.getUser(vo);
+    }
 }

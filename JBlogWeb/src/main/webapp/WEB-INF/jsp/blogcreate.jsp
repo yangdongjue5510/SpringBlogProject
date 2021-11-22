@@ -8,27 +8,16 @@
 </head>
 <body>
 <center>
-    <h1>login</h1>
+    <img src="/static/images/logo.jpg">
     <br>
     <hr>
     <form action="/member/login" method="post">
-        <table border="1" cellpadding="0" cellspacing="0">
-            <tr>
-                <td bgcolor="orange">아이디</td>
-                <td><input type="text" name="username"/></td>
-            </tr>
-            <tr>
-                <td bgcolor="orange">비밀번호</td>
-                <td><input type="password" name="password"/></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="로그인">
-                </td>
-            </tr>
-        </table>
+        <a type="text">블로그 제목 : </a>
+        <input type="text" name="blogName"/>
+        <input type="submit" value="블로그 생성"/>
     </form>
     <br>
+    <a href="/">인덱스 페이지로 이동</a>
     <hr>
 </center>
 </body>

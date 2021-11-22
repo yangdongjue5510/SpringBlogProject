@@ -1,16 +1,19 @@
 package com.yang.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class UserVO {
 
     /*
     PK = userId
     FK = blogName
      */
-    private String userId;
+    private int userId;
+    private String id;
+    private String userName;
     private String password;
-    private String username;
-    private Date regDate;
-    private String blogName;
+    private String role;
 }
