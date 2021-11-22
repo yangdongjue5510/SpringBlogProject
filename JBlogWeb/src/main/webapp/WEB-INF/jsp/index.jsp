@@ -22,7 +22,7 @@
     </div>
 
     <!-- 검색 시작 -->
-    <form action="" method="post">
+    <form action="/api/blogList" method="post">
         <input name="searchKeyword" type="text"/>
         <div>
             <input type="radio" id="contactChoice1"
