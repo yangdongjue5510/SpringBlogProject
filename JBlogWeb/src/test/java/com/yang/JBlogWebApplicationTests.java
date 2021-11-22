@@ -1,8 +1,8 @@
 package com.yang;
 
-import com.yang.domain.BoardVO;
+import com.yang.domain.BlogVO;
 import com.yang.domain.UserVO;
-import com.yang.service.BoardService;
+import com.yang.service.BlogService;
 import com.yang.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,30 +20,18 @@ class JBlogWebApplicationTests {
     UserService userService;
 
     @Autowired
-    BoardService boardService;
-
-    @Test
-    void getUserListTest() {
-        List<UserVO> userList = userService.getUserList();
-        assertEquals(2, userList.size());
-    }
-
-    @Test
-    void getBoardListTest() {
-        List<BoardVO> boardList = boardService.getBoardList();
-        assertEquals(1, boardList.size());
-    }
-
-    @Test
-    void searchBoardListTest() {
-        List<BoardVO> boardList = boardService.searchBoardList("title", "hello");
-        assertEquals(1, boardList.size());
-    }
+    BlogService blogService;
 
     @Test
     void getUserTest(){
         UserVO user = userService.getUser("user", "user123");
         assertNotNull(user);
+    }
+
+    @Test
+    void getBlogList() {
+        List<BlogVO> list = blogService.getBlog();
+        assertEquals(1, list.size());
     }
 
 }

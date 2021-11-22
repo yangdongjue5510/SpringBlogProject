@@ -6,7 +6,7 @@
  * copyright by yangdongjue5510
  * all rights reserved.
  */
-package com.yang.controller;
+package com.yang.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

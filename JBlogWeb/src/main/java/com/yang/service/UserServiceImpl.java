@@ -12,10 +12,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO userDAO;
 
-    @Override
-    public List<UserVO> getUserList() {
-        return userDAO.userVOList();
-    }
+//    @Override
+//    public List<UserVO> getUserList() {
+//        return userDAO.g;
+//    }
 
     @Override
     public UserVO getUser(String id, String password) {

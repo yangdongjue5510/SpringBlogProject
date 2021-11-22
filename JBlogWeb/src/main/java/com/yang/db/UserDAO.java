@@ -45,11 +45,11 @@ public class UserDAO {
         return user;
     }
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    public List<UserVO> userVOList(){
-        String query = "SELECT * FROM USERS";
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<UserVO>(UserVO.class));
-    }
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
+//
+//    public List<UserVO> userVOList(){
+//        String query = "SELECT * FROM USERS";
+//        return jdbcTemplate.query(query, new BeanPropertyRowMapper<UserVO>(UserVO.class));
+//    }
 }
