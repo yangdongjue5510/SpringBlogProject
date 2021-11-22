@@ -62,7 +62,7 @@ class JBlogWebApplicationTests {
         category.setCategoryName("TEST CATEGORY");
         category.setDisplayType("TITLE ONLY");
         category.setCntDisplayPost(4);
-        category.setDescription("test.");
+        //category.setDescription("test.");
         categoryService.insertCategory(category);
 
     }

@@ -1,8 +1,10 @@
 package com.yang.controller.blog;
 
 import com.yang.domain.BlogVO;
+import com.yang.domain.CategoryVO;
 import com.yang.domain.UserVO;
 import com.yang.service.BlogService;
+import com.yang.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import java.util.List;
 public class BlogApiController {
     @Autowired
     BlogService blogService;
+
+    @Autowired
+    CategoryService categoryService;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -36,6 +41,14 @@ public class BlogApiController {
                              HttpSession session) {
         UserVO user = (UserVO) session.getAttribute("user");
         blogService.insertBlog(blogName, user);
-        return null;
+
+        int userId = user.getUserId();
+        CategoryVO category = new CategoryVO();
+        category.setCategoryName("분류없음");
+        category.setBlogId(userId);
+        category.setDisplayType("제목+내용");
+        categoryService.insertCategory(category);
+
+        return "redirect:/blogMain/{userId}";
     }
 }
