@@ -1,5 +1,7 @@
 package com.yang.domain;
 
+import java.util.Date;
+
 public class UserVO {
 
     /*
@@ -9,5 +11,6 @@ public class UserVO {
     private String userId;
     private String password;
     private String username;
+    private Date regDate;
     private String blogName;
 }

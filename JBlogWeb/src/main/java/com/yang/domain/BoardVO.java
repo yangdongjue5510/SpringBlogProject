@@ -1,5 +1,7 @@
 package com.yang.domain;
 
+import java.util.Date;
+
 public class BoardVO {
 
     /*
@@ -8,7 +10,10 @@ public class BoardVO {
      */
 
     private int seq;
-    private String category;
     private String title;
-    private String catgoryName;
+    private String content;
+    private String writer;
+    private String category;
+    private Date regDate;
+    private int cnt;
 }
