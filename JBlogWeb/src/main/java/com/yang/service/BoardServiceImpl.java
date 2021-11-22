@@ -16,4 +16,9 @@ public class BoardServiceImpl implements BoardService{
     public List<BoardVO> getBoardList() {
         return boardDAO.boardList();
     }
+
+    @Override
+    public List<BoardVO> searchBoardList(String searchCondition, String searchKeyword) {
+        return boardDAO.searchBoardList(searchCondition, searchKeyword);
+    }
 }

@@ -30,7 +30,13 @@ class JBlogWebApplicationTests {
     @Test
     void getBoardListTest() {
         List<BoardVO> boardList = boardService.getBoardList();
-        assertEquals(0, boardList.size());
+        assertEquals(1, boardList.size());
+    }
+
+    @Test
+    void searchBoardListTest() {
+        List<BoardVO> boardList = boardService.searchBoardList("title", "hello");
+        assertEquals(1, boardList.size());
     }
 
 }

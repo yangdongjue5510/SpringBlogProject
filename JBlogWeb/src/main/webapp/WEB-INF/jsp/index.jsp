@@ -16,7 +16,7 @@
     <img src="/static/images/logo.jpg">
     <br>
     <div>
-        <a href="/loginView" >로그인</a>
+        <a href="/loginView">로그인</a>
         <a href="/blogCreateView">블로그등록</a>
         <a href="/blogMainView">내 블로그로 가기</a>
     </div>
@@ -26,7 +26,7 @@
         <input name="searchKeyword" type="text"/>
         <div>
             <input type="radio" id="contactChoice1"
-                   name="searchCondition" value="blogName" checked>
+                   name="searchCondition" value="title" checked>
             <label for="contactChoice1">블로그 제목</label>
 
             <input type="radio" id="contactChoice2"
@@ -40,6 +40,7 @@
         <input type="submit" value="검색"/>
     </form>
 
+    <c:if test="${not empty boardList}">
     <table border="1" cellpadding="0" cellspacing="0" width="700">
         <tr>
             <th width="100">블로그 제목</th>
@@ -48,7 +49,6 @@
             <th width="150">상태</th>
             <th width="100">삭제</th>
         </tr>
-
         <c:forEach var="board" items="${boardList}">
             <tr>
                 <td>${board.seq}</td>
@@ -58,8 +58,10 @@
                 <td>${board.cnt }</td>
             </tr>
         </c:forEach>
-
     </table>
+    </c:if>
+
+
     <br>
 </center>
 </body>

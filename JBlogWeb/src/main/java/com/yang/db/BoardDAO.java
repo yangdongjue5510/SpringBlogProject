@@ -18,7 +18,10 @@ public class BoardDAO {
         List<BoardVO> list = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(BoardVO.class));
         return list;
     }
-    //public List<BoardVO> searchBoardList(String SearchCondtion, String SearchKeyword){
 
-    //}
+    public List<BoardVO> searchBoardList(String searchCondtion, String searchKeyword){
+        String query = "SELECT * FROM BOARD" + " WHERE "+ searchCondtion + " = " +"'"+searchKeyword+"'";
+        List<BoardVO> list = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(BoardVO.class));
+        return list;
+    }
 }

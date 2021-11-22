@@ -28,11 +28,17 @@ public class BoardApiController {
     @Autowired
     BoardService boardService;
 
+    @RequestMapping("/")
+    public String index(Model model){
+        model.addAttribute("boardList", boardService.getBoardList());
+        return "forward:/blogListView";
+    }
+
     @RequestMapping("/api/blogList")
     public String blogList(@RequestParam String searchCondition,
                                  @RequestParam String searchKeyword,
                                  Model model){
-        model.addAttribute("boardList", boardService.getBoardList());
-        return "forward:/";
+        model.addAttribute("boardList", boardService.searchBoardList(searchCondition, searchKeyword));
+        return "forward:/blogListView";
     }
 }
