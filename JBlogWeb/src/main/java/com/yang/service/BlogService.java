@@ -6,7 +6,9 @@ import com.yang.domain.UserVO;
 import java.util.List;
 
 public interface BlogService {
-    public List<BlogVO> getBlogList();
+    List<BlogVO> getBlogList();
 
-    public BlogVO getBlog(UserVO vo);
+    BlogVO getBlog(UserVO vo);
+
+    void insertBlog(String blogTitle, UserVO vo);
 }

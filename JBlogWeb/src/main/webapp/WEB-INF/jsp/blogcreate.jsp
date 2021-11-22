@@ -11,7 +11,7 @@
     <img src="/static/images/logo.jpg">
     <br>
     <hr>
-    <form action="/member/login" method="post">
+    <form action="blogCreate" method="post">
         <a type="text">블로그 제목 : </a>
         <input type="text" name="blogName"/>
         <input type="submit" value="블로그 생성"/>

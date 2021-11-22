@@ -10,4 +10,9 @@ public class BlogController {
     public String indexView(){
         return "index";
     }
+
+    @RequestMapping("/blogCreateView")
+    public String blogCreateView() {
+        return "blogcreate";
+    }
 }

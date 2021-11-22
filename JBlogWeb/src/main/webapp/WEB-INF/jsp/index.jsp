@@ -30,7 +30,7 @@
                     <c:if test="${user != null}">
                         <a href="/logout"><b>로그아웃</b></a>
                         <c:if test="${blog == null}">
-                            <a href="#"><b>블로그등록</b></a>
+                            <a href="blogCreateView"><b>블로그등록</b></a>
                         </c:if>
                         <c:if test="${blog != null}">
                             <a href="#"><b>내 블로그로 가기</b></a>
