@@ -15,4 +15,6 @@ public interface BlogService {
     List<BlogVO> searchBlog(String searchCondition, String searchKeyword);
 
     void deleteBlog(int blogId);
+
+    void updateBlog(BlogVO vo);
 }

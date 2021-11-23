@@ -28,6 +28,8 @@ public class BlogDAO {
     private final String SEARCH_BLOG_WHERE = "SELECT * FROM BLOG WHERE ";
     private final String SEARCH_BLOG_ILIKE = " ILIKE ?";
     private final String DELETE_BLOG = "DELETE FROM BLOG WHERE BLOG_ID = ?";
+    private final String UPDATE_BLOG = "UPDATE BLOG SET TITLE = ?, TAG = ?, CNT_DISPLAY_POST = ?  "
+            + "WHERE BLOG_ID = ?";
 
     public List<BlogVO> getBlogList() {
         List<BlogVO> list = new ArrayList<>();
@@ -118,6 +120,24 @@ public class BlogDAO {
             JDBCUtil.close(stmt, conn);
         }
     }
+
+    public void updateBlog(BlogVO vo) {
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(UPDATE_BLOG);
+            stmt.setString(1, vo.getTitle());
+            stmt.setString(2, vo.getTag());
+            stmt.setInt(3, vo.getCntDisplayPost());
+            stmt.setInt(4, vo.getBlogId());
+            int affectedRows = stmt.executeUpdate();
+            log.info("updateBlog executed. {} rows affected", affectedRows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+    }
+
     public BlogVO setBlogVO() throws SQLException {
         BlogVO blog = new BlogVO();
         blog.setBlogId(rs.getInt("BLOG_ID"));
@@ -128,4 +148,5 @@ public class BlogDAO {
         blog.setCntDisplayPost(rs.getInt("CNT_DISPLAY_POST"));
         return blog;
     }
+
 }

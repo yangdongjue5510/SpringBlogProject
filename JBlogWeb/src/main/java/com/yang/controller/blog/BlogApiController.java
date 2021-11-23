@@ -8,12 +8,10 @@ import com.yang.service.CategoryService;
 import com.yang.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -95,5 +93,14 @@ public class BlogApiController {
         BlogVO blog = blogService.getBlog(user);
         model.addAttribute("blog", blog);
         return "forward:/blogAdminView";
+    }
+
+    @RequestMapping("/blogAdminBasic/{blogId}")
+    public String blogAdminBasic(@PathVariable int blogId,
+                                 @ModelAttribute BlogVO blog, Model model) {
+        blog.setBlogId(blogId);
+        blogService.updateBlog(blog);
+        model.addAttribute("blog", blog);
+        return "forward:/blogMainView";
     }
 }

@@ -26,28 +26,30 @@
         <br>
     </header>
     <div>
-        <a>기본 설정</a>
+        <b><a>기본 설정</a></b>
         <a href="#">카테고리</a>
         <a href="#">글작성</a>
     </div>
-    <form action="#" method="post">
+    <br>
+    <form action="/blogAdminBasic/${blog.blogId}" method="post">
         <div>
             <span>블로그 제목 :</span>
-            <input type="text" value="${blog.title}"/>
+            <input type="text" name="title" value="${blog.title}"/>
         </div>
         <div>
             <span>블로그 태그 :</span>
-            <input type="text" value="${blog.tag}"/>
+            <input type="text" name="tag" value="${blog.tag}"/>
         </div>
         <div>
             <span>메인페이지 포스트 :</span>
-            <input type="text" value="${blog.cntDisplayPost}"/>
+            <input type="text" name="cntDisplayPost" value="${blog.cntDisplayPost}"/>
         </div>
         <div>
             <span>로고 이미지 :</span>
             <img src="/static/images/j2eelogo.jpg"/>
         </div>
-        <input type="submit" value="확인"></input>
+        <br>
+        <input type="submit" value="확인"/>
     </form>
 
 </center>
