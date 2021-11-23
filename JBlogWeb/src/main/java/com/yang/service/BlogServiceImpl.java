@@ -40,6 +40,7 @@ public class BlogServiceImpl implements BlogService{
         category.setCategoryName("분류없음");
         category.setBlogId(userId);
         category.setDisplayType("제목+내용");
+        category.setCntDisplayPost(5);
         categoryDAO.insertCategory(category);
     }
 

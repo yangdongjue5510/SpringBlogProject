@@ -27,7 +27,7 @@
     </header>
     <div>
         <b><a>기본 설정</a></b>
-        <a href="#">카테고리</a>
+        <a href="/blogAdminCategory/${blog.blogId}">카테고리</a>
         <a href="#">글작성</a>
     </div>
     <br>
