@@ -7,6 +7,7 @@ import com.yang.service.BlogService;
 import com.yang.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,14 @@ public class BlogApiController {
     CategoryService categoryService;
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(Model model,  HttpSession session) {
         List<BlogVO> list = blogService.getBlogList();
         model.addAttribute("blogList", list);
+
+        UserVO user = (UserVO) session.getAttribute("user");
+        if (session.getAttribute("user") != null) {
+
+        }
         return "forward:/indexView";
     }
 
@@ -40,15 +46,10 @@ public class BlogApiController {
     public String blogCreate(@RequestParam String blogName,
                              HttpSession session) {
         UserVO user = (UserVO) session.getAttribute("user");
-        blogService.insertBlog(blogName, user);
-
-        int userId = user.getUserId();
-        CategoryVO category = new CategoryVO();
-        category.setCategoryName("분류없음");
-        category.setBlogId(userId);
-        category.setDisplayType("제목+내용");
-        categoryService.insertCategory(category);
-
-        return "redirect:/blogMain/{userId}";
+        BlogVO blog = blogService.getBlog(user);
+        if (blog == null) {
+            blogService.insertBlog(blogName, user);
+        }
+        return "redirect:/";
     }
 }

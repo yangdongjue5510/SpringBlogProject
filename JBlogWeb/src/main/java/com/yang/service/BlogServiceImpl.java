@@ -1,10 +1,13 @@
 package com.yang.service;
 
 import com.yang.db.BlogDAO;
+import com.yang.db.CategoryDAO;
 import com.yang.domain.BlogVO;
+import com.yang.domain.CategoryVO;
 import com.yang.domain.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +15,9 @@ import java.util.List;
 public class BlogServiceImpl implements BlogService{
     @Autowired
     BlogDAO blogDAO;
+
+    @Autowired
+    CategoryDAO categoryDAO;
 
 
     @Override
@@ -25,8 +31,15 @@ public class BlogServiceImpl implements BlogService{
         return blogDAO.getBlog(vo);
     }
 
+    @Transactional
     @Override
     public void insertBlog(String blogTitle, UserVO vo) {
         blogDAO.insertBlog(blogTitle, vo);
+        int userId = vo.getUserId();
+        CategoryVO category = new CategoryVO();
+        category.setCategoryName("분류없음");
+        category.setBlogId(userId);
+        category.setDisplayType("제목+내용");
+        categoryDAO.insertCategory(category);
     }
 }
