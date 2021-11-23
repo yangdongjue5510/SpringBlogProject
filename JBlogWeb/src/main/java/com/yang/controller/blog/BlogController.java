@@ -31,4 +31,9 @@ public class BlogController {
     public String blogCreateView(HttpSession session) {
         return "blogcreate";
     }
+
+    @RequestMapping("/blogMainView")
+    public String blogMainView() {
+        return "blogmain";
+    }
 }

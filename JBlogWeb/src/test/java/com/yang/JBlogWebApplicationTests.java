@@ -78,4 +78,12 @@ class JBlogWebApplicationTests {
         blogService.deleteBlog(2);
         assertEquals(1, blogService.getBlogList().size());
     }
+
+    @Test
+    void getCategoryList() {
+        BlogVO blogVO = new BlogVO();
+        blogVO.setBlogId(1);
+        List<CategoryVO> categoryList = categoryService.getCategoryList(blogVO);
+        assertEquals(1, categoryList.size());
+    }
 }

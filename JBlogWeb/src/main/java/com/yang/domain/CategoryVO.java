@@ -8,7 +8,7 @@ import java.util.Date;
 public class CategoryVO {
     private int blogId;
     private int categoryId;     //PK
-    private String CategoryName;
+    private String categoryName;
     private String displayType;
     private int cntDisplayPost;
     private String description;

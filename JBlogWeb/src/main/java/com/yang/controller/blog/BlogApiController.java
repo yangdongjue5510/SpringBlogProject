@@ -63,4 +63,13 @@ public class BlogApiController {
         blogService.deleteBlog(blogId);
         return "redirect:/";
     }
+
+    @RequestMapping("/blogMain/{blogId}")
+    public String blogMain(@PathVariable int blogId, Model model) {
+        UserVO user = new UserVO();
+        user.setUserId(blogId);
+        BlogVO blog = blogService.getBlog(user);
+        model.addAttribute("blog", blog);
+        return "forward:/blogMainView";
+    }
 }

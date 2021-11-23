@@ -34,3 +34,12 @@ A.title:hover 		{ font-size:9pt; font-family:"±¼¸²Ã¼"; color:dc143c; text-decora
 
 .tablelabel		{ font-size:9pt;font-weight: bold;height:24px;text-align:center; }
 .tablecontent	{ font-size:9pt; font-family:"±¼¸²Ã¼"; height:20px;}
+
+/*custom css*/
+.header {
+	position:relative;
+}
+
+.header .header-text {
+	position:absolute;
+}

@@ -33,7 +33,7 @@
                             <a href="blogCreateView"><b>블로그등록</b></a>
                         </c:if>
                         <c:if test="${blog != null}">
-                            <a href="#"><b>내 블로그로 가기</b></a>
+                            <a href="/blogMain/${blog.blogId}"><b>내 블로그로 가기</b></a>
                         </c:if>
                     </c:if>
                 </td>
@@ -67,7 +67,7 @@
                 </tr>
 
                 <tr>
-                    <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="#">${blog.title}</a></td>
+                    <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/blogMain/${blog.blogId}">${blog.title}</a></td>
                     <td class="tablecontent" align="center">${blog.userId}</td>
                     <td class="tablecontent" align="center"><img height="32" src="static/images/j2eelogo.jpg" border="0"></td>
                     <td class="tablecontent" align="center">${blog.status}</td>

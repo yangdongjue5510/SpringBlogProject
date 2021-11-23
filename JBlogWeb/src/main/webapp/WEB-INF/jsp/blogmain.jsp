@@ -1,35 +1,58 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-    <title>login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>${blog.title}</title>
+    <Link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
 <center>
-    <h1>login</h1>
-    <br>
-    <hr>
-    <form action="/member/login" method="post">
-        <table border="1" cellpadding="0" cellspacing="0">
+    <header>
+        <h1>${blog.title}</h1>
+        <h3>${blog.tag}</h3>
+        <div>
+            <a href="#">로그인</a>
+            <a href="#">로그아웃</a>
+            <a href="#">블로그 관리</a>
+        </div>
+        <br>
+        <div>
+            <h3>카테고리</h3>
+            <c:forEach var="category" items="${categoryList}">
+                <a href="#">${category.categoryName}</a>
+                <br>
+            </c:forEach>
+        </div>
+    </header>
+    <div>
+        <table border="1" cellpadding="0" cellspacing="0" width="1200">
             <tr>
-                <td bgcolor="orange">아이디</td>
-                <td><input type="text" name="username"/></td>
+                <th bgcolor="dodgerblue" width="200">제목</th>
+                <th bgcolor="dodgerblue" width="150">날짜</th>
+                <th bgcolor="dodgerblue" width="150">작성자</th>
+                <th bgcolor="dodgerblue" width="350">내용</th>
+                <th bgcolor="dodgerblue" width="150">수정/삭제</th>
             </tr>
+
+            <c:forEach var="post" items="${postList}">
             <tr>
-                <td bgcolor="orange">비밀번호</td>
-                <td><input type="password" name="password"/></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="로그인">
+                <td><a href="#"/> ${post.title}</td>
+                <td><fmt:formatDate value="${post.createdDate}" pattern="yyyy-MM-dd"/> </td>
+                <td>${post.writer }</td>
+                <td>${post.content}</td>
+                <td>
+                    <a href="#">EDIT</a>
+                    <span>/</span>
+                    <a href="#">DEL</a>
                 </td>
             </tr>
-        </table>
-    </form>
-    <br>
-    <hr>
+            </c:forEach>
+    </div>
+
 </center>
 </body>
 </html>
