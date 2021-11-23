@@ -34,6 +34,7 @@ public class BlogApiController {
     public String index(Model model) {
         if (model.getAttribute("blogList") == null){
             List<BlogVO> list = blogService.getBlogList();
+            // todo. 유저이름으로 표기하기
             model.addAttribute("blogList", list);
         }
         return "forward:/indexView";
