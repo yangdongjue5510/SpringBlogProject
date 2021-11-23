@@ -37,4 +37,8 @@ public class BlogController {
         return "blogmain";
     }
 
+    @RequestMapping("/blogAdminView")
+    public String blogAdminView() {
+        return "blogadmin_basic";
+    }
 }

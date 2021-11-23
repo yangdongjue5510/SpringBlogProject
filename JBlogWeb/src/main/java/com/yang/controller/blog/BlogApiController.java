@@ -60,7 +60,6 @@ public class BlogApiController {
     }
 
 
-
     @PostMapping("/blogCreate")
     public String blogCreate(@RequestParam String blogName,
                              HttpSession session) {
@@ -87,5 +86,14 @@ public class BlogApiController {
         List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
         model.addAttribute("categoryList", categoryList);
         return "forward:/blogMainView";
+    }
+
+    @RequestMapping("/blogAdmin/{blogId}")
+    public String blogAdmin(@PathVariable int blogId,
+                            HttpSession session, Model model) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        BlogVO blog = blogService.getBlog(user);
+        model.addAttribute("blog", blog);
+        return "forward:/blogAdminView";
     }
 }

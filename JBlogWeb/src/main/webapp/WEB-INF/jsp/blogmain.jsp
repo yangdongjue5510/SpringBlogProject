@@ -16,12 +16,12 @@
         <h3>${blog.tag}</h3>
         <div>
             <c:if test="${user == null }">
-                <a href="/userLoginView">로그인</a>
+                <a href="/loginView">로그인</a>
             </c:if>
             <c:if test="${user != null }">
                 <a href="/logout">로그아웃</a>
                 <c:if test="${blog.blogId == user.userId}">
-                    <a href="#">블로그 관리</a>
+                    <a href="/blogAdmin/${blog.blogId}">블로그 관리</a>
                 </c:if>
             </c:if>
         </div>
