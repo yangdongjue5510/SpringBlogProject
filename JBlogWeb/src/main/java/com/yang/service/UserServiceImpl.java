@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
         vo.setPassword(password);
         return userDAO.getUser(vo);
     }
+
+    @Override
+    public List<UserVO> searchUserByUserName(String userName) {
+        return userDAO.searchUserByUserName(userName);
+    }
 }

@@ -9,4 +9,6 @@ public interface UserService {
 //    List<UserVO> getUserList();
 
     UserVO getUser(String id, String password);
+
+    List<UserVO> searchUserByUserName(String userName);
 }

@@ -21,7 +21,7 @@ public class BlogController {
         if (user != null) {
             BlogVO blog = blogService.getBlog(user);
             if(blog != null) {
-                model.addAttribute("blog", blog.getBlogId());
+                model.addAttribute("blogId", blog.getBlogId());
             }
         }
         return "index";
@@ -36,4 +36,5 @@ public class BlogController {
     public String blogMainView() {
         return "blogmain";
     }
+
 }

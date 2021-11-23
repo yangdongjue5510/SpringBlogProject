@@ -29,11 +29,11 @@
 
                     <c:if test="${user != null}">
                         <a href="/logout"><b>로그아웃</b></a>
-                        <c:if test="${blog == null}">
+                        <c:if test="${blogId == null}">
                             <a href="blogCreateView"><b>블로그등록</b></a>
                         </c:if>
-                        <c:if test="${blog != null}">
-                            <a href="/blogMain/${blog.blogId}"><b>내 블로그로 가기</b></a>
+                        <c:if test="${blogId != null}">
+                            <a href="/blogMain/${blogId}"><b>내 블로그로 가기</b></a>
                         </c:if>
                     </c:if>
                 </td>
@@ -46,7 +46,7 @@
                 <td height="20" colspan="10" align="center" class="tdcontent">
                     <input type="radio" name="searchCondition" value="TITLE" checked="checked">블로그 제목&nbsp;&nbsp;
                     <input type="radio" name="searchCondition" value="TAG">태그&nbsp;&nbsp;
-                    <input type="radio" name="searchCondition" value="BLOGGER">블로거
+                    <input type="radio" name="searchCondition" value="USER_NAME">블로거
                 </td>
             </tr>
         </table>

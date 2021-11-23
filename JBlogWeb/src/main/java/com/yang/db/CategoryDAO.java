@@ -50,6 +50,7 @@ public class CategoryDAO {
             while (rs.next()) {
                 list.add(setCategoryVO());
             }
+            log.info("getCategoryList execute.");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

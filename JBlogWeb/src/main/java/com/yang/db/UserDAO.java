@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -19,6 +20,7 @@ public class UserDAO {
     private PreparedStatement stmt;
     private ResultSet rs;
     private String USER_GET = "select * from blog_user where id = ? and password = ?";
+    private String USER_SEARCH_BY_USERNAME = "select * from blog_user where user_name ilike ?";
 
     public UserVO getUser(UserVO vo) {
         UserVO user = null;
@@ -48,6 +50,25 @@ public class UserDAO {
         user.setRole(rs.getString("ROLE"));
         user.setUserName(rs.getString("USER_NAME"));
         return user;
+    }
+
+    public List<UserVO> searchUserByUserName(String userName) {
+        List<UserVO> list = new ArrayList<>();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(USER_SEARCH_BY_USERNAME);
+            stmt.setString(1, "%"+userName+"%");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                UserVO user = setUserVO();
+                list.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+        return list;
     }
 
 //    @Autowired
