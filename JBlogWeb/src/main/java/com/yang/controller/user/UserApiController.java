@@ -25,9 +25,10 @@ public class UserApiController {
     public String login(HttpSession session,
                         @RequestParam String id,
                         @RequestParam String password){
-        UserVO user = userService.getUser(id, password);
-        session.setAttribute("user", user);
-
+        if (id != null && password != null) {
+            UserVO user = userService.getUser(id, password);
+            session.setAttribute("user", user);
+        }
         return "redirect:/";
     }
 }
