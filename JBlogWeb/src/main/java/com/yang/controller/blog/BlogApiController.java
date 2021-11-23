@@ -59,11 +59,7 @@ public class BlogApiController {
         return "forward:/indexView";
     }
 
-    @RequestMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "forward:/";
-    }
+
 
     @PostMapping("/blogCreate")
     public String blogCreate(@RequestParam String blogName,

@@ -22,7 +22,7 @@ public class CategoryDAO {
             + "VALUES ((select nvl(max(CATEGORY_ID), 0) +1 from CATEGORY), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())";
     private String GET_CATEGORY_LIST_BY_BLOGID = "SELECT * FROM CATEGORY WHERE BLOG_ID = ?";
 
-    public void insertCategory(CategoryVO vo){
+    public void insertCategory(CategoryVO vo) {
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(INSERT_CATEGORY);
