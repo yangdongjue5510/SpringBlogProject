@@ -25,18 +25,22 @@ public class BlogApiController {
     CategoryService categoryService;
 
     @RequestMapping("/")
-    public String index(Model model,  HttpSession session) {
-        List<BlogVO> list = blogService.getBlogList();
-        model.addAttribute("blogList", list);
-
-        UserVO user = (UserVO) session.getAttribute("user");
-        if (user != null) {
-            BlogVO blog = blogService.getBlog(user);
-            model.addAttribute("blog", blog.getBlogId());
+    public String index(Model model) {
+        if (model.getAttribute("blogList") == null){
+            List<BlogVO> list = blogService.getBlogList();
+            model.addAttribute("blogList", list);
         }
         return "forward:/indexView";
     }
 
+    @RequestMapping("/searchBlog")
+    public String searchBlog(@RequestParam String searchCondition,
+                             @RequestParam String searchKeyword,
+                             Model model) {
+        List<BlogVO> blogList = blogService.searchBlog(searchCondition, searchKeyword);
+        model.addAttribute("blogList", blogList);
+        return "forward:/indexView";
+    }
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
