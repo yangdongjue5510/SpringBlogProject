@@ -66,4 +66,10 @@ class JBlogWebApplicationTests {
         categoryService.insertCategory(category);
 
     }
+
+    @Test
+    void searchBlogTitle() {
+        List<BlogVO> list = blogService.searchBlog("TITLE", "test");
+        assertEquals(2, list.size());
+    }
 }

@@ -11,4 +11,6 @@ public interface BlogService {
     BlogVO getBlog(UserVO vo);
 
     void insertBlog(String blogTitle, UserVO vo);
+
+    List<BlogVO> searchBlog(String searchCondition, String searchKeyword);
 }

@@ -25,6 +25,8 @@ public class BlogDAO {
     private final String GET_BLOG_BY_USER_ID = "SELECT * FROM BLOG WHERE USER_ID = ?";
     private final String INSERT_BLOG = "INSERT INTO BLOG (BLOG_ID, TITLE, TAG, CNT_DISPLAY_POST, STATUS, USER_ID)"
             + "VALUES (?, ?, ?, ?, ?, ?)";
+    private final String SEARCH_BLOG_WHERE = "SELECT * FROM BLOG WHERE ";
+    private final String SEARCH_BLOG_ILIKE = " ILIKE ?";
     public List<BlogVO> getBlogList(){
         List<BlogVO> list = new ArrayList<>();
         conn = JDBCUtil.getConnection();
@@ -79,6 +81,26 @@ public class BlogDAO {
         } finally {
             JDBCUtil.close(stmt, conn);
         }
+    }
+
+    public List<BlogVO> searchBlog(String searchCondition, String searchKeyword) {
+        String SEARCH_BLOG = SEARCH_BLOG_WHERE + searchCondition +SEARCH_BLOG_ILIKE;
+        List<BlogVO> blogList = new ArrayList<>();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(SEARCH_BLOG);
+            stmt.setString(1, "%"+searchKeyword+"%");
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                BlogVO blog = setBlogVO();
+                blogList.add(blog);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
+        return blogList;
     }
 
     public BlogVO setBlogVO() throws SQLException {

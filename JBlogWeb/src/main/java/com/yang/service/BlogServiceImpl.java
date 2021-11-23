@@ -42,4 +42,12 @@ public class BlogServiceImpl implements BlogService{
         category.setDisplayType("제목+내용");
         categoryDAO.insertCategory(category);
     }
+
+    @Override
+    public List<BlogVO> searchBlog(String searchCondition, String searchKeyword) {
+        List<BlogVO> blogList = blogDAO.searchBlog(searchCondition, searchKeyword);
+        return blogList;
+    }
+
+
 }
