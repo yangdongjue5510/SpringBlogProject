@@ -30,8 +30,9 @@ public class BlogApiController {
         model.addAttribute("blogList", list);
 
         UserVO user = (UserVO) session.getAttribute("user");
-        if (session.getAttribute("user") != null) {
-
+        if (user != null) {
+            BlogVO blog = blogService.getBlog(user);
+            model.addAttribute("blog", blog.getBlogId());
         }
         return "forward:/indexView";
     }
