@@ -1,14 +1,13 @@
 package com.yang.controller.blog;
 
 import com.yang.domain.BlogVO;
-import com.yang.domain.CategoryVO;
 import com.yang.domain.UserVO;
 import com.yang.service.BlogService;
 import com.yang.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +40,7 @@ public class BlogApiController {
         model.addAttribute("blogList", blogList);
         return "forward:/indexView";
     }
+
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -55,6 +55,12 @@ public class BlogApiController {
         if (blog == null) {
             blogService.insertBlog(blogName, user);
         }
+        return "redirect:/";
+    }
+
+    @RequestMapping("/deleteBlog/{blogId}")
+    public String blogDelete(@PathVariable int blogId) {
+        blogService.deleteBlog(blogId);
         return "redirect:/";
     }
 }

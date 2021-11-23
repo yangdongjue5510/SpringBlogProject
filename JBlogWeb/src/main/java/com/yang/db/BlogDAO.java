@@ -27,7 +27,9 @@ public class BlogDAO {
             + "VALUES (?, ?, ?, ?, ?, ?)";
     private final String SEARCH_BLOG_WHERE = "SELECT * FROM BLOG WHERE ";
     private final String SEARCH_BLOG_ILIKE = " ILIKE ?";
-    public List<BlogVO> getBlogList(){
+    private final String DELETE_BLOG = "DELETE FROM BLOG WHERE BLOG_ID = ?";
+
+    public List<BlogVO> getBlogList() {
         List<BlogVO> list = new ArrayList<>();
         conn = JDBCUtil.getConnection();
         try {
@@ -45,7 +47,7 @@ public class BlogDAO {
         return list;
     }
 
-    public BlogVO getBlog(UserVO vo){
+    public BlogVO getBlog(UserVO vo) {
         BlogVO blog = null;
         try {
             conn = JDBCUtil.getConnection();
@@ -103,6 +105,19 @@ public class BlogDAO {
         return blogList;
     }
 
+    public void deleteBlog(int blogId) {
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(DELETE_BLOG);
+            stmt.setInt(1, blogId);
+            int affectedRows = stmt.executeUpdate();
+            log.info("deleteBlog executed. {} affected", affectedRows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+    }
     public BlogVO setBlogVO() throws SQLException {
         BlogVO blog = new BlogVO();
         blog.setBlogId(rs.getInt("BLOG_ID"));

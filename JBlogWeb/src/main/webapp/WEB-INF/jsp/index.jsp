@@ -73,7 +73,7 @@
                     <td class="tablecontent" align="center">${blog.status}</td>
                     <td class="tablecontent" align="center">
                         <c:if test="${user.role eq 'ADMIN'}">
-                            <a href="#"><img height="9" src="static/images/delete.jpg" border="0"></a>
+                            <a href="/deleteBlog/${blog.blogId}"><img height="9" src="static/images/delete.jpg" border="0"></a>
                         </c:if>
                     </td>
                 </tr>

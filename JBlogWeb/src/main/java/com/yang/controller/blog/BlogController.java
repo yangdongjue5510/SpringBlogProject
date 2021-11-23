@@ -20,7 +20,9 @@ public class BlogController {
         UserVO user = (UserVO) session.getAttribute("user");
         if (user != null) {
             BlogVO blog = blogService.getBlog(user);
-            model.addAttribute("blog", blog.getBlogId());
+            if(blog != null) {
+                model.addAttribute("blog", blog.getBlogId());
+            }
         }
         return "index";
     }

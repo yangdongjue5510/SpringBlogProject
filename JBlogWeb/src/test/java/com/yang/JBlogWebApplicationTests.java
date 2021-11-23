@@ -72,4 +72,10 @@ class JBlogWebApplicationTests {
         List<BlogVO> list = blogService.searchBlog("TITLE", "test");
         assertEquals(2, list.size());
     }
+
+    @Test
+    void deleteBlog() {
+        blogService.deleteBlog(2);
+        assertEquals(1, blogService.getBlogList().size());
+    }
 }

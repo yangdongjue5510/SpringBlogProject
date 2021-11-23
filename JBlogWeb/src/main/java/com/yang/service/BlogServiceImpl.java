@@ -49,5 +49,10 @@ public class BlogServiceImpl implements BlogService{
         return blogList;
     }
 
+    @Override
+    public void deleteBlog(int blogId) {
+        blogDAO.deleteBlog(blogId);
+    }
+
 
 }
