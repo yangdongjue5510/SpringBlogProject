@@ -19,7 +19,7 @@ public class BlogController {
     public String indexView(HttpSession session, Model model){
         UserVO user = (UserVO) session.getAttribute("user");
         if (user != null) {
-            BlogVO blog = blogService.getBlog(user);
+            BlogVO blog = blogService.getBlog(user.getUserId());
             if(blog != null) {
                 model.addAttribute("blogId", blog.getBlogId());
             }

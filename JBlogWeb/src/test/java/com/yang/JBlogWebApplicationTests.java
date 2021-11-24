@@ -41,9 +41,8 @@ class JBlogWebApplicationTests {
 
     @Test
     void getBlog() {
-        UserVO user = new UserVO();
-        user.setUserId(1);
-        BlogVO blog = blogService.getBlog(user);
+
+        BlogVO blog = blogService.getBlog(1);
         assertNotNull(blog);
     }
 
@@ -89,7 +88,7 @@ class JBlogWebApplicationTests {
 
     @Test
     void getCategory() {
-        CategoryVO category = categoryService.getCategory(3);
+        CategoryVO category = categoryService.getCategory(2);
         int blogId = category.getBlogId();
         assertEquals(2, blogId);
     }

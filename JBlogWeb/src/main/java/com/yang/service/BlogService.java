@@ -8,7 +8,7 @@ import java.util.List;
 public interface BlogService {
     List<BlogVO> getBlogList();
 
-    BlogVO getBlog(UserVO vo);
+    BlogVO getBlog(int userId);
 
     void insertBlog(String blogTitle, UserVO vo);
 

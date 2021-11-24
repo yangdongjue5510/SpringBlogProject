@@ -24,9 +24,7 @@ public class CategoryApiController {
     @GetMapping("/blogAdminCategory/{blogId}")
     public String blogAdminCategoryGet(@PathVariable int blogId,
                                        Model model) {
-        UserVO user = new UserVO();
-        user.setUserId(blogId);
-        BlogVO blog = blogService.getBlog(user);
+        BlogVO blog = blogService.getBlog(blogId);
         List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
         model.addAttribute("blog", blog);
         model.addAttribute("categoryList", categoryList);
@@ -52,19 +50,11 @@ public class CategoryApiController {
     @GetMapping("/getCategory/{categoryId}")
     public String getCategory(@PathVariable int categoryId, Model model) {
         CategoryVO category = categoryService.getCategory(categoryId);
-        model.addAttribute("category", category);
-        return "forward:/updateCategory";
-    }
-
-    @GetMapping("/updateCategory")
-    public String updateCategory(Model model){
-        CategoryVO category = (CategoryVO) model.getAttribute("category");
-        UserVO user = new UserVO();
-        user.setUserId(category.getBlogId());
-        BlogVO blog = blogService.getBlog(user);
+        BlogVO blog = blogService.getBlog(category.getBlogId());
         List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
         model.addAttribute("blog", blog);
         model.addAttribute("categoryList", categoryList);
-        return "redirect:/blogAdminCategoryUpdateView";
+        model.addAttribute("category", category);
+        return "forward:/blogAdminCategoryUpdateView";
     }
 }

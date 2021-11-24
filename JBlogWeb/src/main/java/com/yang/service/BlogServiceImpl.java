@@ -27,8 +27,8 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public BlogVO getBlog(UserVO vo) {
-        return blogDAO.getBlog(vo);
+    public BlogVO getBlog(int userId) {
+        return blogDAO.getBlog(userId);
     }
 
     @Transactional

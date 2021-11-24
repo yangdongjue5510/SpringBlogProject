@@ -42,7 +42,7 @@
         </tr>
         <c:forEach var="category" items="${categoryList}">
         <tr>
-            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/blogAdminCategory?blogId=${blog.blogId}&categoryId=${category.categoryId}">${category.categoryId}</a></td>
+            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/getCategory/${category.categoryId}">${category.categoryId}</a></td>
             <td class="tablecontent" align="center">${category.categoryName}</td>
             <td class="tablecontent" align="center">${category.displayType}</td>
             <td class="tablecontent" align="center">${category.cntDisplayPost}</td>
@@ -60,7 +60,7 @@
     <form action="/blogAdminCategory/${blog.blogId}" method="post">
         <div>
             <span>카테고리 명 : </span>
-            <input type="text" name="categoryName"/>
+            <input type="text" name="categoryName" value="${category.categoryName}"/>
         </div>
         <div>
             <span>보이기 유형 : </span>
@@ -71,11 +71,11 @@
         </div>
         <div>
             <span>포스트 수 : </span>
-            <input type="text" name="cntDisplayPost"/>
+            <input type="text" name="cntDisplayPost" value="${category.cntDisplayPost}"/>
         </div>
         <div>
             <span>설명 : </span>
-            <input type="text" name="description"/>
+            <input type="text" name="description" value="${category.description}"/>
         </div>
         <br>
         <input type="submit" value="카테고리 추가"/>

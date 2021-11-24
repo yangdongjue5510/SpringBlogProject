@@ -51,7 +51,7 @@ public class BlogApiController {
         else if (searchCondition.equals("USER_NAME")) {
             List<UserVO> userList = userService.searchUserByUserName(searchKeyword);
             blogList = userList.stream()
-                    .map(user -> blogService.getBlog(user))
+                    .map(user -> blogService.getBlog(user.getUserId()))
                     .collect(Collectors.toList());
         }
         model.addAttribute("blogList", blogList);
@@ -63,7 +63,7 @@ public class BlogApiController {
     public String blogCreate(@RequestParam String blogName,
                              HttpSession session) {
         UserVO user = (UserVO) session.getAttribute("user");
-        BlogVO blog = blogService.getBlog(user);
+        BlogVO blog = blogService.getBlog(user.getUserId());
         if (blog == null) {
             blogService.insertBlog(blogName, user);
         }
@@ -78,9 +78,7 @@ public class BlogApiController {
 
     @RequestMapping("/blogMain/{blogId}")
     public String blogMain(@PathVariable int blogId, Model model) {
-        UserVO user = new UserVO();
-        user.setUserId(blogId);
-        BlogVO blog = blogService.getBlog(user);
+        BlogVO blog = blogService.getBlog(blogId);
         model.addAttribute("blog", blog);
         List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
         model.addAttribute("categoryList", categoryList);
@@ -91,7 +89,7 @@ public class BlogApiController {
     public String blogAdmin(@PathVariable int blogId,
                             HttpSession session, Model model) {
         UserVO user = (UserVO) session.getAttribute("user");
-        BlogVO blog = blogService.getBlog(user);
+        BlogVO blog = blogService.getBlog(user.getUserId());
         model.addAttribute("blog", blog);
         return "forward:/blogAdminView";
     }

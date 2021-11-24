@@ -49,12 +49,12 @@ public class BlogDAO {
         return list;
     }
 
-    public BlogVO getBlog(UserVO vo) {
+    public BlogVO getBlog(int userId) {
         BlogVO blog = null;
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(GET_BLOG_BY_USER_ID);
-            stmt.setInt(1, vo.getUserId());
+            stmt.setInt(1, userId);
             rs = stmt.executeQuery();
 
             while (rs.next()){
