@@ -106,4 +106,16 @@ class JBlogWebApplicationTests {
         post.setTitle("test");
         postService.insertPost(post);
     }
+
+    @Test
+    void getPostTest(){
+        List<PostVO> post = postService.getPost(1);
+        assertEquals(3,post.size());
+    }
+
+    @Test
+    void getPostByCategoryIdTest(){
+        List<PostVO> post = postService.getPostByCategoryId(2);
+        assertEquals(2,post.size());
+    }
 }

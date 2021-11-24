@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Repository
@@ -20,6 +22,8 @@ public class PostDAO {
     private String INSERT_POST = "INSERT INTO POST "
             + "(POST_ID, CATEGORY_ID, TITLE, CONTENT, CREATED_DATE)"
             + "VALUES ((select nvl(max(CATEGORY_ID), 0) +1 from POST), ?, ?, ?, CURRENT_TIMESTAMP())";
+    private String GET_POST = "SELECT * FROM POST WHERE CATEGORY_ID = ? ORDER BY CREATED_DATE DESC";
+    private String GET_POST_JOIN = "SELECT DISTINCT POST_ID, CONTENT, POST.CATEGORY_ID, TITLE, POST.CREATED_DATE FROM POST JOIN CATEGORY WHERE CATEGORY.BLOG_ID =  ?";
 
     public void insertPost(PostVO vo) {
         try {
@@ -35,5 +39,53 @@ public class PostDAO {
         } finally {
             JDBCUtil.close(stmt, conn);
         }
+    }
+
+    public List<PostVO> getPost(int blogId) {
+        List<PostVO> list = new ArrayList<>();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(GET_POST_JOIN);
+            stmt.setInt(1, blogId);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(setPostVO());
+            }
+            log.info("getPost excuted.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+        return list;
+    }
+
+    public List<PostVO> getPostByCategoryId(int categoryId) {
+        List<PostVO> list = new ArrayList<>();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(GET_POST);
+            stmt.setInt(1, categoryId);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(setPostVO());
+            }
+            log.info("getPostByCategoryId excuted.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+        return list;
+    }
+
+    public PostVO setPostVO() throws SQLException{
+        PostVO post = new PostVO();
+        post.setTitle(rs.getString("TITLE"));
+        post.setPostId(rs.getInt("POST_ID"));
+        post.setContent(rs.getString("CONTENT"));
+        post.setCreatedDate(rs.getDate("CREATED_DATE"));
+        post.setCategoryId(rs.getInt("CATEGORY_ID"));
+        return post;
     }
 }
