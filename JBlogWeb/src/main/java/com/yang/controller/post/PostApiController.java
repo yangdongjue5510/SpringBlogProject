@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class PostApiController {
@@ -35,6 +35,14 @@ public class PostApiController {
         return "forward:/blogAdminPostView";
     }
 
+    @GetMapping("/blogMain")
+    public String blogMainByCategory(@RequestParam int blogId, @RequestParam int categoryId, Model model) {
+        List<PostVO> postList = postService.getPostByCategoryId(categoryId);
+        model.addAttribute("category", categoryService.getCategory(categoryId));
+        blogService.forwardBlogView(blogId, model);
+        return "forward:/blogMainView";
+    }
+
     @PostMapping("/insertPost/{blogId}")
     public String insertPost(@ModelAttribute PostVO post, @PathVariable int blogId,
                              Model model) {
@@ -44,9 +52,10 @@ public class PostApiController {
     }
 
     @GetMapping("/deletePost")
-    public String deletePost(@RequestParam int postId, @RequestParam int blogId,
+    public String deletePost(@RequestParam int postId, @RequestParam int blogId, @RequestParam int categoryId,
                              Model model) {
         postService.deletePost(postId);
+        model.addAttribute("category", categoryService.getCategory(categoryId));
         blogService.forwardBlogView(blogId, model);
         return "forward:/blogMainView";
     }

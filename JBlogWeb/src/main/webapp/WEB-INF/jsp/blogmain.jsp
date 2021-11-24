@@ -29,7 +29,7 @@
         <div>
             <h3>카테고리</h3>
             <c:forEach var="category" items="${categoryList}">
-                <a href="#">${category.categoryName}</a>
+                <a href="/blogMain?blogId=${blog.blogId}&categoryId=${category.categoryId}">${category.categoryName}</a>
                 <br>
             </c:forEach>
         </div>
@@ -41,7 +41,9 @@
                 <th bgcolor="dodgerblue" width="200">제목</th>
                 <th bgcolor="dodgerblue" width="150">날짜</th>
                 <th bgcolor="dodgerblue" width="150">작성자</th>
-                <th bgcolor="dodgerblue" width="350">내용</th>
+                <c:if test="${empty category or category.displayType ne '제목'}">
+                    <th bgcolor="dodgerblue" width="350">내용</th>
+                </c:if>
                 <c:if test="${blog.userId == user.userId}">
                     <th bgcolor="dodgerblue" width="150">수정/삭제</th>
                 </c:if>
@@ -53,12 +55,14 @@
                 <td>${post.title}</td>
                 <td><fmt:formatDate value="${post.createdDate}" pattern="yyyy-MM-dd"/></td>
                 <td>${blogWriter.userName}</td>
-                <td>${post.content}</td>
+                <c:if test="${empty category or category.displayType ne '제목'}">
+                    <td>${post.content}</td>
+                </c:if>
                 <c:if test="${blog.blogId == user.userId}">
                     <td>
                         <a href="/updatePost?blogId=${blog.blogId}&postId=${post.postId}">EDIT</a>
                         <span>/</span>
-                        <a href="/deletePost?blogId=${blog.blogId}&postId=${post.postId}">DEL</a>
+                        <a href="/deletePost?blogId=${blog.blogId}&postId=${post.postId}&categoryId=${category.categoryId}">DEL</a>
                     </td>
                 </c:if>
             </tr>

@@ -76,10 +76,10 @@ public class BlogServiceImpl implements BlogService{
         CategoryVO category = (CategoryVO) model.getAttribute("category");
 
         List<PostVO> postList = null;
-        if (category == null || category.getCategoryName().equals("분류없음")) {
+        if (category == null) {
             postList = postService.getPost(blogId);
         }
-        else if (!category.getCategoryName().equals("분류없음")) {
+        else if (category.getCategoryName() != null) {
             postList = postService.getPostByCategoryId(category.getCategoryId());
         }
 
