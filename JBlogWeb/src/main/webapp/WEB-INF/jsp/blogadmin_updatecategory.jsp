@@ -57,7 +57,7 @@
         </c:forEach>
     </table>
     <br>
-    <form action="/blogAdminCategory/${blog.blogId}" method="post">
+    <form action="/updateCategory/${category.categoryId}" method="post">
         <div>
             <span>카테고리 명 : </span>
             <input type="text" name="categoryName" value="${category.categoryName}"/>
@@ -78,7 +78,7 @@
             <input type="text" name="description" value="${category.description}"/>
         </div>
         <br>
-        <input type="submit" value="카테고리 추가"/>
+        <input type="submit" value="카테고리 수정"/>
     </form>
 
 </center>

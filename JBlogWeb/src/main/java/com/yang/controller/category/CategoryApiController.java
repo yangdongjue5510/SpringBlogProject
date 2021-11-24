@@ -57,4 +57,12 @@ public class CategoryApiController {
         model.addAttribute("category", category);
         return "forward:/blogAdminCategoryUpdateView";
     }
+
+    @PostMapping("/updateCategory/{categoryId}")
+    public String updateCategory(@ModelAttribute CategoryVO category,
+                                 @PathVariable int categoryId) {
+        category.setCategoryId(categoryId);
+        categoryService.updateCategory(category);
+        return "redirect:/getCategory/"+categoryId;
+    }
 }

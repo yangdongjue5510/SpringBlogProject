@@ -22,7 +22,7 @@ public class CategoryDAO {
             + "VALUES ((select nvl(max(CATEGORY_ID), 0) +1 from CATEGORY), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())";
     private String GET_CATEGORY_LIST_BY_BLOGID = "SELECT * FROM CATEGORY WHERE BLOG_ID = ?";
     private String DELETE_CATEGORY = "DELETE FROM CATEGORY WHERE CATEGORY_ID = ?";
-    private String UPDATE_CATEGORY = "UPDATE CATEGORY SET CATEGORY_NAME = ?, DISPLAY_TYPE = ?, CNT_DISPLAY_POST = ?, DESCRIPTION = ?  ";
+    private String UPDATE_CATEGORY = "UPDATE CATEGORY SET CATEGORY_NAME = ?, DISPLAY_TYPE = ?, CNT_DISPLAY_POST = ?, DESCRIPTION = ?  WHERE CATEGORY_ID = ? ";
     private String GET_CATEGORY_BY_CATEGORY_ID = "SELECT * FROM CATEGORY WHERE CATEGORY_ID = ?";
     public void insertCategory(CategoryVO vo) {
         try {
@@ -83,6 +83,7 @@ public class CategoryDAO {
             stmt.setString(2, category.getDisplayType());
             stmt.setInt(3, category.getCntDisplayPost());
             stmt.setString(4, category.getDescription());
+            stmt.setInt(5, category.getCategoryId());
             int affectedRows = stmt.executeUpdate();
             log.info("updateCategory executed. {} rows affected.", affectedRows);
         } catch(SQLException e) {
