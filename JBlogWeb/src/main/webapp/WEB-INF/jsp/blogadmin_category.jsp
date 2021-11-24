@@ -28,7 +28,7 @@
     <div>
         <a href="/blogAdmin/${blog.blogId}">기본 설정</a>
         <b><a>카테고리</a></b>
-        <a href="#">글작성</a>
+        <a href="/blogAdminPost/${blog.blogId}">글작성</a>
     </div>
     <br>
     <table width="720" height="100" border="1" cellpadding="0" cellspacing="0">

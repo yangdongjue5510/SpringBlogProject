@@ -57,7 +57,7 @@
         <c:if test="${not empty blogList}">
             <table width="720" height="100" border="1" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td width="320" class="tablelabel">블로그 제목</td>
+                    <td width="420" class="tablelabel">블로그 제목</td>
                     <td width="100" class="tablelabel">블로거</td>
                     <td width="100" class="tablelabel">로고</td>
                     <td width="100" class="tablelabel">상태</td>

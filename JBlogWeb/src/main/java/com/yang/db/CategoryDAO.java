@@ -24,6 +24,7 @@ public class CategoryDAO {
     private String DELETE_CATEGORY = "DELETE FROM CATEGORY WHERE CATEGORY_ID = ?";
     private String UPDATE_CATEGORY = "UPDATE CATEGORY SET CATEGORY_NAME = ?, DISPLAY_TYPE = ?, CNT_DISPLAY_POST = ?, DESCRIPTION = ?  WHERE CATEGORY_ID = ? ";
     private String GET_CATEGORY_BY_CATEGORY_ID = "SELECT * FROM CATEGORY WHERE CATEGORY_ID = ?";
+
     public void insertCategory(CategoryVO vo) {
         try {
             conn = JDBCUtil.getConnection();

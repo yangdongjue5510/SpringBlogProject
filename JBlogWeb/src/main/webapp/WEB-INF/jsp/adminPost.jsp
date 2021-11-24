@@ -26,32 +26,39 @@
         <br>
     </header>
     <div>
-        <b><a>기본 설정</a></b>
+        <a href="/blogAdmin/${blog.blogId}">기본 설정</a>
         <a href="/blogAdminCategory/${blog.blogId}">카테고리</a>
-        <a href="/blogAdminPost/${blog.blogId}">글작성</a>
+        <b><a>글작성</a></b>
+
     </div>
     <br>
-    <form action="/blogAdminBasic/${blog.blogId}" method="post">
+    <form action="/insertPost/${blog.blogId}" method="post">
+        <select name="categoryId">
+            <c:forEach var="category" items="${categoryList}">
+                <option value="${category.categoryId}"
+                        <c:if test="${post.categoryId == category.categoryId}">
+                            selected
+                        </c:if>
+                >${category.categoryName}</option>
+            </c:forEach>
+        </select>
         <div>
-            <span>블로그 제목 :</span>
-            <input type="text" name="title" value="${blog.title}"/>
+            <span>포스트 제목 :</span>
+            <input type="text" name="title" value="${post.title}"/>
         </div>
         <div>
-            <span>블로그 태그 :</span>
-            <input type="text" name="tag" value="${blog.tag}"/>
-        </div>
-        <div>
-            <span>메인페이지 포스트 :</span>
-            <input type="text" name="cntDisplayPost" value="${blog.cntDisplayPost}"/>
-        </div>
-        <div>
-            <span>로고 이미지 :</span>
-            <img src="/static/images/j2eelogo.jpg"/>
+            <span>내용 :</span>
+            <textarea name="content">${post.tag}</textarea>
         </div>
         <br>
-        <input type="submit" value="확인"/>
+        <input type="submit"
+                <c:if test="${empty post}">
+                    value="확인"
+                </c:if>
+                <c:if test="${not empty post}">
+                    value="수정하기"
+                </c:if>/>
     </form>
-
 </center>
 </body>
 </html>
