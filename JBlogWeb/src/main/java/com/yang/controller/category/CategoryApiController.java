@@ -63,6 +63,7 @@ public class CategoryApiController {
                                  @PathVariable int categoryId) {
         category.setCategoryId(categoryId);
         categoryService.updateCategory(category);
-        return "redirect:/getCategory/"+categoryId;
+        int blogId = categoryService.getCategory(categoryId).getBlogId();
+        return "redirect:/blogAdminCategory/"+blogId;
     }
 }
