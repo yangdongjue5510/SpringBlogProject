@@ -20,8 +20,8 @@
             </c:if>
             <c:if test="${user != null }">
                 <a href="/logout">로그아웃</a>
+                <a href="/blogMain/${blog.blogId}">내 블로그 메인</a>
             </c:if>
-            <a href="/blogMain/${blog.blogId}">내 블로그 메인</a>
         </div>
         <br>
     </header>

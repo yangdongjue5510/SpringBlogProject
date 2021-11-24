@@ -21,11 +21,6 @@ public class CategoryApiController {
     @Autowired
     BlogService blogService;
 
-    @GetMapping("/blogAdminCategoryView")
-    public String blogAdminCategoryView() {
-        return "blogadmin_category";
-    }
-
     @GetMapping("/blogAdminCategory/{blogId}")
     public String blogAdminCategoryGet(@PathVariable int blogId,
                                        Model model) {
@@ -52,5 +47,24 @@ public class CategoryApiController {
                                           @RequestParam int categoryId) {
         categoryService.deleteCategory(categoryId);
         return "redirect:/blogAdminCategory/"+blogId;
+    }
+
+    @GetMapping("/getCategory/{categoryId}")
+    public String getCategory(@PathVariable int categoryId, Model model) {
+        CategoryVO category = categoryService.getCategory(categoryId);
+        model.addAttribute("category", category);
+        return "forward:/updateCategory";
+    }
+
+    @GetMapping("/updateCategory")
+    public String updateCategory(Model model){
+        CategoryVO category = (CategoryVO) model.getAttribute("category");
+        UserVO user = new UserVO();
+        user.setUserId(category.getBlogId());
+        BlogVO blog = blogService.getBlog(user);
+        List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
+        model.addAttribute("blog", blog);
+        model.addAttribute("categoryList", categoryList);
+        return "redirect:/blogAdminCategoryUpdateView";
     }
 }

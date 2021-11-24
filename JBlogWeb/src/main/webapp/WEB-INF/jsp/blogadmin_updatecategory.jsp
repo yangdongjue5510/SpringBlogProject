@@ -42,7 +42,7 @@
         </tr>
         <c:forEach var="category" items="${categoryList}">
         <tr>
-            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/getCategory/${category.categoryId}">${category.categoryId}</a></td>
+            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/blogAdminCategory?blogId=${blog.blogId}&categoryId=${category.categoryId}">${category.categoryId}</a></td>
             <td class="tablecontent" align="center">${category.categoryName}</td>
             <td class="tablecontent" align="center">${category.displayType}</td>
             <td class="tablecontent" align="center">${category.cntDisplayPost}</td>
@@ -64,8 +64,10 @@
         </div>
         <div>
             <span>보이기 유형 : </span>
-            <input type="radio" name="displayType" value="제목" checked>제목
-            <input type="radio" name="displayType" value="제목+내용">제목+내용
+            <input type="radio" name="displayType" value="제목" <c:if test="${category.displayType eq '제목'}">
+                   checked </c:if>>제목
+            <input type="radio" name="displayType" value="제목+내용" <c:if test="${category.displayType eq '제목+내용'}">
+                   checked </c:if>>제목+내용
         </div>
         <div>
             <span>포스트 수 : </span>

@@ -42,7 +42,7 @@
         </tr>
         <c:forEach var="category" items="${categoryList}">
         <tr>
-            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/getCategory/${category.categoryId}">${category.categoryId}</a></td>
+            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/blogAdminCategory?blogId=${blog.blogId}&categoryId=${category.categoryId}">${category.categoryId}</a></td>
             <td class="tablecontent" align="center">${category.categoryName}</td>
             <td class="tablecontent" align="center">${category.displayType}</td>
             <td class="tablecontent" align="center">${category.cntDisplayPost}</td>

@@ -22,7 +22,8 @@ public class CategoryDAO {
             + "VALUES ((select nvl(max(CATEGORY_ID), 0) +1 from CATEGORY), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())";
     private String GET_CATEGORY_LIST_BY_BLOGID = "SELECT * FROM CATEGORY WHERE BLOG_ID = ?";
     private String DELETE_CATEGORY = "DELETE FROM CATEGORY WHERE CATEGORY_ID = ?";
-
+    private String UPDATE_CATEGORY = "UPDATE CATEGORY SET CATEGORY_NAME = ?, DISPLAY_TYPE = ?, CNT_DISPLAY_POST = ?, DESCRIPTION = ?  ";
+    private String GET_CATEGORY_BY_CATEGORY_ID = "SELECT * FROM CATEGORY WHERE CATEGORY_ID = ?";
     public void insertCategory(CategoryVO vo) {
         try {
             conn = JDBCUtil.getConnection();
@@ -74,6 +75,40 @@ public class CategoryDAO {
         }
     }
 
+    public void updateCategory(CategoryVO category) {
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(UPDATE_CATEGORY);
+            stmt.setString(1, category.getCategoryName());
+            stmt.setString(2, category.getDisplayType());
+            stmt.setInt(3, category.getCntDisplayPost());
+            stmt.setString(4, category.getDescription());
+            int affectedRows = stmt.executeUpdate();
+            log.info("updateCategory executed. {} rows affected.", affectedRows);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+    }
+
+    public CategoryVO getCategory(int categoryId) {
+        CategoryVO category = new CategoryVO();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(GET_CATEGORY_BY_CATEGORY_ID);
+            stmt.setInt(1, categoryId);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                category = setCategoryVO();
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+        return category;
+    }
     public CategoryVO setCategoryVO() throws SQLException {
         CategoryVO category = new CategoryVO();
         category.setCategoryId(rs.getInt("CATEGORY_ID"));

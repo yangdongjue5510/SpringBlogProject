@@ -86,4 +86,11 @@ class JBlogWebApplicationTests {
         List<CategoryVO> categoryList = categoryService.getCategoryList(blogVO);
         assertEquals(1, categoryList.size());
     }
+
+    @Test
+    void getCategory() {
+        CategoryVO category = categoryService.getCategory(3);
+        int blogId = category.getBlogId();
+        assertEquals(2, blogId);
+    }
 }

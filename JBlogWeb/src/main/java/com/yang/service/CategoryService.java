@@ -11,4 +11,8 @@ public interface CategoryService {
     List<CategoryVO> getCategoryList(BlogVO vo);
 
     void deleteCategory(int categoryId);
+
+    void updateCategory(CategoryVO vo);
+
+    CategoryVO getCategory(int categoryId);
 }
