@@ -2,8 +2,10 @@ package com.yang.service;
 
 import com.yang.db.BlogDAO;
 import com.yang.db.CategoryDAO;
+import com.yang.db.UserDAO;
 import com.yang.domain.BlogVO;
 import com.yang.domain.CategoryVO;
+import com.yang.domain.PostVO;
 import com.yang.domain.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,12 @@ public class BlogServiceImpl implements BlogService{
 
     @Autowired
     CategoryDAO categoryDAO;
+
+    @Autowired
+    PostService postService;
+
+    @Autowired
+    UserDAO userDAO;
 
 
     @Override
@@ -64,9 +72,21 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void forwardBlogView(int blogId, Model model) {
         BlogVO blog = getBlog(blogId);
-        List<CategoryVO> categoryList = categoryDAO.getCategoryList(blog);
+        UserVO blogWriter = userDAO.getUserByBlogId(blogId);
+        CategoryVO category = (CategoryVO) model.getAttribute("category");
+
+        List<PostVO> postList = null;
+        if (category == null || category.getCategoryName().equals("분류없음")) {
+            postList = postService.getPost(blogId);
+        }
+        else if (!category.getCategoryName().equals("분류없음")) {
+            postList = postService.getPostByCategoryId(category.getCategoryId());
+        }
+
+        model.addAttribute("blogWriter", blogWriter);
         model.addAttribute("blog", blog);
-        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("categoryList", categoryDAO.getCategoryList(blog));
+        model.addAttribute("postList", postList);
     }
 
 

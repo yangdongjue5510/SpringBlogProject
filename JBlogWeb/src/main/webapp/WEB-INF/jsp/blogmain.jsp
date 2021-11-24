@@ -48,7 +48,7 @@
             <tr>
                 <td><a href="#"/> ${post.title}</td>
                 <td><fmt:formatDate value="${post.createdDate}" pattern="yyyy-MM-dd"/> </td>
-                <td>${post.writer }</td>
+                <td>${blogWriter.userName}</td>
                 <td>${post.content}</td>
                 <td>
                     <a href="#">EDIT</a>

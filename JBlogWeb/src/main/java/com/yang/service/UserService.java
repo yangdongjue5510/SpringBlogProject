@@ -10,5 +10,7 @@ public interface UserService {
 
     UserVO getUser(String id, String password);
 
+    UserVO getUserByBLogId(int blogId);
+
     List<UserVO> searchUserByUserName(String userName);
 }

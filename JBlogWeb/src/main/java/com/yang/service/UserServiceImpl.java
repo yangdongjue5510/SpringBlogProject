@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserVO getUserByBLogId(int blogId) {
+        return userDAO.getUserByBlogId(blogId);
+    }
+
+    @Override
     public List<UserVO> searchUserByUserName(String userName) {
         return userDAO.searchUserByUserName(userName);
     }
