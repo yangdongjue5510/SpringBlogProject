@@ -21,7 +21,7 @@ public class PostDAO {
 
     private String INSERT_POST = "INSERT INTO POST "
             + "(POST_ID, CATEGORY_ID, TITLE, CONTENT, CREATED_DATE)"
-            + "VALUES ((select nvl(max(CATEGORY_ID), 0) +1 from POST), ?, ?, ?, CURRENT_TIMESTAMP())";
+            + "VALUES ((select nvl(max(POST_ID), 0) +1 from POST), ?, ?, ?, CURRENT_TIMESTAMP())";
     private String GET_POST = "SELECT * FROM POST WHERE CATEGORY_ID = ? ORDER BY CREATED_DATE DESC";
     private String GET_POST_JOIN = "SELECT DISTINCT POST_ID, CONTENT, POST.CATEGORY_ID, TITLE, POST.CREATED_DATE " +
             "FROM POST JOIN (SELECT DISTINCT * FROM CATEGORY WHERE CATEGORY.BLOG_ID = ?) A" +
