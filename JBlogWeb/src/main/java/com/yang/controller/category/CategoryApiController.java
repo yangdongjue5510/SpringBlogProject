@@ -47,6 +47,6 @@ public class CategoryApiController {
                                         @ModelAttribute CategoryVO category) {
         category.setBlogId(blogId);
         categoryService.insertCategory(category);
-        return "forward:/blogAdminCategory/{blogId}";
+        return "redirect:/blogAdminCategory/"+blogId;
     }
 }

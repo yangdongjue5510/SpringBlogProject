@@ -26,7 +26,7 @@
         <br>
     </header>
     <div>
-        <a href="#">기본 설정</a>
+        <a href="/blogAdmin/${blog.blogId}">기본 설정</a>
         <b><a>카테고리</a></b>
         <a href="#">글작성</a>
     </div>
@@ -64,8 +64,8 @@
         </div>
         <div>
             <span>보이기 유형 : </span>
-            <input type="radio" name="tag" value="제목" checked/>
-            <input type="radio" name="tag" value="제목+내용"/>
+            <input type="radio" name="displayType" value="제목" checked>제목
+            <input type="radio" name="displayType" value="제목+내용">제목+내용
         </div>
         <div>
             <span>포스트 수 : </span>

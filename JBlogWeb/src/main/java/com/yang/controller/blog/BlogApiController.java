@@ -98,10 +98,9 @@ public class BlogApiController {
 
     @RequestMapping("/blogAdminBasic/{blogId}")
     public String blogAdminBasic(@PathVariable int blogId,
-                                 @ModelAttribute BlogVO blog, Model model) {
+                                 @ModelAttribute BlogVO blog) {
         blog.setBlogId(blogId);
         blogService.updateBlog(blog);
-        model.addAttribute("blog", blog);
-        return "forward:/blogMainView";
+        return "forward:/blogMain/"+blogId;
     }
 }
