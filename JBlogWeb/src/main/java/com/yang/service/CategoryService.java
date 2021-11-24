@@ -9,4 +9,6 @@ public interface CategoryService {
     void insertCategory(CategoryVO vo);
 
     List<CategoryVO> getCategoryList(BlogVO vo);
+
+    void deleteCategory(int categoryId);
 }

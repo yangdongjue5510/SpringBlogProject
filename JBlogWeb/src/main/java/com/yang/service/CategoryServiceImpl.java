@@ -23,4 +23,9 @@ public class CategoryServiceImpl implements CategoryService{
     public List<CategoryVO> getCategoryList(BlogVO vo) {
         return categoryDAO.getCategoryList(vo);
     }
+
+    @Override
+    public void deleteCategory(int categoryId) {
+        categoryDAO.deleteCategory(categoryId);
+    }
 }

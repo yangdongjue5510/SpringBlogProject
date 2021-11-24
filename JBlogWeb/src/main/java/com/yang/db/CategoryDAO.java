@@ -21,6 +21,7 @@ public class CategoryDAO {
             + "(CATEGORY_ID, BLOG_ID, CATEGORY_NAME, DISPLAY_TYPE, CNT_DISPLAY_POST, DESCRIPTION, CREATED_DATE)"
             + "VALUES ((select nvl(max(CATEGORY_ID), 0) +1 from CATEGORY), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())";
     private String GET_CATEGORY_LIST_BY_BLOGID = "SELECT * FROM CATEGORY WHERE BLOG_ID = ?";
+    private String DELETE_CATEGORY = "DELETE FROM CATEGORY WHERE CATEGORY_ID = ?";
 
     public void insertCategory(CategoryVO vo) {
         try {
@@ -59,6 +60,20 @@ public class CategoryDAO {
         return list;
     }
 
+    public void deleteCategory(int categoryId) {
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(DELETE_CATEGORY);
+            stmt.setInt(1, categoryId);
+            int affectedRows = stmt.executeUpdate();
+            log.info("deleteCategory executed. {} rows affected", affectedRows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+    }
+
     public CategoryVO setCategoryVO() throws SQLException {
         CategoryVO category = new CategoryVO();
         category.setCategoryId(rs.getInt("CATEGORY_ID"));
@@ -71,4 +86,5 @@ public class CategoryDAO {
         category.setModifiedDate(rs.getTime("MODIFIED_DATE"));
         return category;
     }
+
 }

@@ -20,8 +20,8 @@
             </c:if>
             <c:if test="${user != null }">
                 <a href="/logout">로그아웃</a>
+                <a href="/blogMain/${blog.blogId}">내 블로그 메인</a>
             </c:if>
-            <a href="/blogMain/${blog.blogId}">내 블로그 메인</a>
         </div>
         <br>
     </header>
@@ -50,7 +50,7 @@
             <td class="tablecontent" align="center">
                 <c:if test="${category.categoryName eq '분류없음'}">삭제불가</c:if>
                 <c:if test="${category.categoryName ne '분류없음'}">
-                    <a href="/deleteCategory/${blog.blogId}"><img height="9" src="/static/images/delete.jpg" border="0"></a>
+                    <a href="/deleteCategory?blogId=${blogId}&categoryId=${category.categoryId}"><img height="9" src="/static/images/delete.jpg" border="0"></a>
                 </c:if>
             </td>
         </tr>
