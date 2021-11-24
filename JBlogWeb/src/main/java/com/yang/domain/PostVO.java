@@ -10,5 +10,5 @@ public class PostVO {
     private int categoryId;
     private String title;
     private String content;
-    private Date date;
+    private Date createdDate;
 }

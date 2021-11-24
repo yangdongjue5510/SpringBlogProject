@@ -2,9 +2,11 @@ package com.yang;
 
 import com.yang.domain.BlogVO;
 import com.yang.domain.CategoryVO;
+import com.yang.domain.PostVO;
 import com.yang.domain.UserVO;
 import com.yang.service.BlogService;
 import com.yang.service.CategoryService;
+import com.yang.service.PostService;
 import com.yang.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ class JBlogWebApplicationTests {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    PostService postService;
 
     @Test
     void getUserTest(){
@@ -91,5 +96,14 @@ class JBlogWebApplicationTests {
         CategoryVO category = categoryService.getCategory(2);
         int blogId = category.getBlogId();
         assertEquals(2, blogId);
+    }
+
+    @Test
+    void insertPost() {
+        PostVO post = new PostVO();
+        post.setCategoryId(1);
+        post.setContent("testing...");
+        post.setTitle("test");
+        postService.insertPost(post);
     }
 }
