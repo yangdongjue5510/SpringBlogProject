@@ -42,7 +42,7 @@
         </tr>
         <c:forEach var="category" items="${categoryList}">
         <tr>
-            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/getCategory/${category.categoryId}">${category.categoryId}</a></td>
+            <td class="tablecontent">&nbsp;&nbsp;&nbsp;<c:if test="${category.categoryName ne '분류없음'}"> <a href="/getCategory/${category.categoryId}"></c:if>${category.categoryId}</a></td>
             <td class="tablecontent" align="center">${category.categoryName}</td>
             <td class="tablecontent" align="center">${category.displayType}</td>
             <td class="tablecontent" align="center">${category.cntDisplayPost}</td>
