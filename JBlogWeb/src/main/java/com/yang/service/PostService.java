@@ -10,4 +10,6 @@ public interface PostService {
     List<PostVO> getPostByCategoryId(int categoryId);
 
     List<PostVO> getPost(int blogId);
+
+    void deletePost(int postId);
 }

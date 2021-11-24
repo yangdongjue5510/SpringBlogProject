@@ -35,26 +35,32 @@
         </div>
     </header>
     <div>
-        <table border="1" cellpadding="0" cellspacing="0" width="1200">
+        <br>
+        <table border="1" cellpadding="0" cellspacing="0" width="1000">
             <tr>
                 <th bgcolor="dodgerblue" width="200">제목</th>
                 <th bgcolor="dodgerblue" width="150">날짜</th>
                 <th bgcolor="dodgerblue" width="150">작성자</th>
                 <th bgcolor="dodgerblue" width="350">내용</th>
-                <th bgcolor="dodgerblue" width="150">수정/삭제</th>
+                <c:if test="${blog.blogId == user.userId}}">
+                    <th bgcolor="dodgerblue" width="150">수정/삭제</th>
+                </c:if>
+
             </tr>
 
             <c:forEach var="post" items="${postList}">
             <tr>
                 <td><a href="#"/> ${post.title}</td>
-                <td><fmt:formatDate value="${post.createdDate}" pattern="yyyy-MM-dd"/> </td>
+                <td><fmt:formatDate value="${post.createdDate}" pattern="yyyy-MM-dd"/></td>
                 <td>${blogWriter.userName}</td>
                 <td>${post.content}</td>
-                <td>
-                    <a href="#">EDIT</a>
-                    <span>/</span>
-                    <a href="#">DEL</a>
-                </td>
+                <c:if test="${blog.blogId == user.userId}}">
+                    <td>
+                        <a href="#">EDIT</a>
+                        <span>/</span>
+                        <a href="/deletePost?blogId=${blog.blogId}&postId=${post.postId}">DEL</a>
+                    </td>
+                </c:if>
             </tr>
             </c:forEach>
     </div>

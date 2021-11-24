@@ -110,7 +110,7 @@ class JBlogWebApplicationTests {
     @Test
     void getPostTest(){
         List<PostVO> post = postService.getPost(2);
-        assertEquals(0,post.size());
+        assertEquals(1,post.size());
     }
 
     @Test

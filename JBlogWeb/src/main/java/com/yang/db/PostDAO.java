@@ -25,7 +25,8 @@ public class PostDAO {
     private String GET_POST = "SELECT * FROM POST WHERE CATEGORY_ID = ? ORDER BY CREATED_DATE DESC";
     private String GET_POST_JOIN = "SELECT DISTINCT POST_ID, CONTENT, POST.CATEGORY_ID, TITLE, POST.CREATED_DATE " +
             "FROM POST JOIN (SELECT DISTINCT * FROM CATEGORY WHERE CATEGORY.BLOG_ID = ?) A" +
-            " WHERE POST.CATEGORY_ID = A.CATEGORY_ID;";
+            " WHERE POST.CATEGORY_ID = A.CATEGORY_ID ORDER BY POST.CREATED_DATE DESC";
+    private String DELETE_POST = "DELETE FROM POST WHERE POST_ID = ?";
 
     public void insertPost(PostVO vo) {
         try {
@@ -35,7 +36,7 @@ public class PostDAO {
             stmt.setString(2, vo.getTitle());
             stmt.setString(3, vo.getContent());
             int affectedRows = stmt.executeUpdate();
-            log.info("InsertPost excuted. {} rows affected.", affectedRows);
+            log.info("InsertPost executed. {} rows affected.", affectedRows);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -53,7 +54,7 @@ public class PostDAO {
             while (rs.next()) {
                 list.add(setPostVO());
             }
-            log.info("getPost excuted.");
+            log.info("getPost executed.");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -72,13 +73,27 @@ public class PostDAO {
             while (rs.next()) {
                 list.add(setPostVO());
             }
-            log.info("getPostByCategoryId excuted.");
+            log.info("getPostByCategoryId executed.");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             JDBCUtil.close(stmt, conn);
         }
         return list;
+    }
+
+    public void deletePost(int postId) {
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(DELETE_POST);
+            stmt.setInt(1, postId);
+            int affectedRows = stmt.executeUpdate();
+            log.info("deletePost executed. {} rows affected.", affectedRows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
     }
 
     public PostVO setPostVO() throws SQLException{

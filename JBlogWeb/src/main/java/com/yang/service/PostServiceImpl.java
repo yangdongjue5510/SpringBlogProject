@@ -27,4 +27,9 @@ public class PostServiceImpl implements PostService{
     public List<PostVO> getPost(int blogId) {
         return postDAO.getPost(blogId);
     }
+
+    @Override
+    public void deletePost(int postId) {
+        postDAO.deletePost(postId);
+    }
 }
