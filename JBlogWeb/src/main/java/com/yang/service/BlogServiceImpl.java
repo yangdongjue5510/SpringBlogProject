@@ -8,6 +8,7 @@ import com.yang.domain.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -58,6 +59,14 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void updateBlog(BlogVO vo) {
         blogDAO.updateBlog(vo);
+    }
+
+    @Override
+    public void forwardBlogView(int blogId, Model model) {
+        BlogVO blog = getBlog(blogId);
+        List<CategoryVO> categoryList = categoryDAO.getCategoryList(blog);
+        model.addAttribute("blog", blog);
+        model.addAttribute("categoryList", categoryList);
     }
 
 

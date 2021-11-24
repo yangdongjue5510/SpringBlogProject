@@ -2,6 +2,7 @@ package com.yang.service;
 
 import com.yang.domain.BlogVO;
 import com.yang.domain.UserVO;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface BlogService {
     void deleteBlog(int blogId);
 
     void updateBlog(BlogVO vo);
+
+    void forwardBlogView(int blogId, Model model);
 }
