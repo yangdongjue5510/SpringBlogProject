@@ -42,7 +42,7 @@
                 <th bgcolor="dodgerblue" width="150">날짜</th>
                 <th bgcolor="dodgerblue" width="150">작성자</th>
                 <th bgcolor="dodgerblue" width="350">내용</th>
-                <c:if test="${blog.blogId == user.userId}}">
+                <c:if test="${blog.userId == user.userId}">
                     <th bgcolor="dodgerblue" width="150">수정/삭제</th>
                 </c:if>
 
@@ -50,13 +50,13 @@
 
             <c:forEach var="post" items="${postList}">
             <tr>
-                <td><a href="#"/> ${post.title}</td>
+                <td>${post.title}</td>
                 <td><fmt:formatDate value="${post.createdDate}" pattern="yyyy-MM-dd"/></td>
                 <td>${blogWriter.userName}</td>
                 <td>${post.content}</td>
-                <c:if test="${blog.blogId == user.userId}}">
+                <c:if test="${blog.blogId == user.userId}">
                     <td>
-                        <a href="#">EDIT</a>
+                        <a href="/updatePost?blogId=${blog.blogId}&postId=${post.postId}">EDIT</a>
                         <span>/</span>
                         <a href="/deletePost?blogId=${blog.blogId}&postId=${post.postId}">DEL</a>
                     </td>

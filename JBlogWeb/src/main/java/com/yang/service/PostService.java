@@ -11,5 +11,7 @@ public interface PostService {
 
     List<PostVO> getPost(int blogId);
 
+    void updatePost(PostVO post);
+
     void deletePost(int postId);
 }

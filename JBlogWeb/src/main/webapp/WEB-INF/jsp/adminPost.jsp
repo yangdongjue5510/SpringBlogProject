@@ -32,33 +32,39 @@
 
     </div>
     <br>
-    <form action="/insertPost/${blog.blogId}" method="post">
-        <select name="categoryId">
-            <c:forEach var="category" items="${categoryList}">
-                <option value="${category.categoryId}"
-                        <c:if test="${post.categoryId == category.categoryId}">
-                            selected
-                        </c:if>
-                >${category.categoryName}</option>
-            </c:forEach>
-        </select>
-        <div>
-            <span>포스트 제목 :</span>
-            <input type="text" name="title" value="${post.title}"/>
-        </div>
-        <div>
-            <span>내용 :</span>
-            <textarea name="content">${post.tag}</textarea>
-        </div>
-        <br>
-        <input type="submit"
-                <c:if test="${empty post}">
-                    value="확인"
-                </c:if>
-                <c:if test="${not empty post}">
-                    value="수정하기"
-                </c:if>/>
-    </form>
+    <c:if test="${empty post}">
+        <form action="/insertPost/${blog.blogId}" method="post">
+            </c:if>
+        <c:if test="${not empty post}">
+        <form action="/updatePost/${blog.blogId}/${post.postId}" method="post">
+            </c:if>
+
+            <select name="categoryId">
+                <c:forEach var="category" items="${categoryList}">
+                    <option value="${category.categoryId}"
+                            <c:if test="${post.categoryId == category.categoryId}">
+                                selected
+                            </c:if>
+                    >${category.categoryName}</option>
+                </c:forEach>
+            </select>
+            <div>
+                <span>포스트 제목 :</span>
+                <input type="text" name="title" value="${post.title}"/>
+            </div>
+            <div>
+                <span>내용 :</span>
+                <textarea name="content">${post.content}</textarea>
+            </div>
+            <br>
+            <input type="submit"
+                    <c:if test="${empty post}">
+                        value="확인"
+                    </c:if>
+                    <c:if test="${not empty post}">
+                        value="수정하기"
+                    </c:if>/>
+        </form>
 </center>
 </body>
 </html>

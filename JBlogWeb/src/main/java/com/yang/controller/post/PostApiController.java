@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PostApiController {
@@ -35,8 +36,7 @@ public class PostApiController {
     }
 
     @PostMapping("/insertPost/{blogId}")
-    public String insertPost(@ModelAttribute PostVO post,
-                             @PathVariable int blogId,
+    public String insertPost(@ModelAttribute PostVO post, @PathVariable int blogId,
                              Model model) {
         postService.insertPost(post);
         blogService.forwardBlogView(blogId, model);
@@ -44,12 +44,37 @@ public class PostApiController {
     }
 
     @GetMapping("/deletePost")
-    public String deletePost(@RequestParam int postId,
-                             @RequestParam int blogId,
+    public String deletePost(@RequestParam int postId, @RequestParam int blogId,
                              Model model) {
         postService.deletePost(postId);
         blogService.forwardBlogView(blogId, model);
         return "forward:/blogMainView";
     }
 
+    @GetMapping("/updatePost")
+    public String updatePost(@RequestParam int postId, @RequestParam int blogId,
+                             Model model) {
+
+        BlogVO blog = blogService.getBlog(blogId);
+        model.addAttribute("blog", blog);
+        model.addAttribute("categoryList", categoryService.getCategoryList(blog));
+
+        PostVO postVO = postService.getPost(blogId).stream()
+                .filter(post -> post.getPostId() == postId).findAny().get();
+        model.addAttribute("post", postVO);
+
+        return "forward:/blogAdminPostView";
+    }
+
+    @PostMapping("/updatePost/{blogId}/{postId}")
+    public String postUpdatePost(@ModelAttribute PostVO post, @PathVariable int blogId,
+                                 @PathVariable int postId, Model model) {
+        post.setPostId(postId);
+        if(post.getContent() == "" || post.getTitle() == "") {
+            return "redirect:/updatePost?blogId="+blogId+"&postId="+postId;
+        }
+        postService.updatePost(post);
+        blogService.forwardBlogView(blogId, model);
+        return "forward:/blogMainView";
+    }
 }

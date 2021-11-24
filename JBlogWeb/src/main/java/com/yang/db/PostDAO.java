@@ -27,6 +27,7 @@ public class PostDAO {
             "FROM POST JOIN (SELECT DISTINCT * FROM CATEGORY WHERE CATEGORY.BLOG_ID = ?) A" +
             " WHERE POST.CATEGORY_ID = A.CATEGORY_ID ORDER BY POST.CREATED_DATE DESC";
     private String DELETE_POST = "DELETE FROM POST WHERE POST_ID = ?";
+    private String UPDATE_POST = "UPDATE POST SET TITLE = ?, CONTENT = ?, CATEGORY_ID = ? WHERE POST_ID = ?";
 
     public void insertPost(PostVO vo) {
         try {
@@ -35,8 +36,26 @@ public class PostDAO {
             stmt.setInt(1, vo.getCategoryId());
             stmt.setString(2, vo.getTitle());
             stmt.setString(3, vo.getContent());
+
             int affectedRows = stmt.executeUpdate();
             log.info("InsertPost executed. {} rows affected.", affectedRows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+    }
+
+    public void updatePost(PostVO vo) {
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(UPDATE_POST);
+            stmt.setString(1, vo.getTitle());
+            stmt.setString(2, vo.getContent());
+            stmt.setInt(3, vo.getCategoryId());
+            stmt.setInt(4, vo.getPostId());
+            int affectedRows = stmt.executeUpdate();
+            log.info("updatePost executed. {} rows affected.", affectedRows);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
