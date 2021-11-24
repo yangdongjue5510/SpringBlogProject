@@ -78,19 +78,13 @@ public class BlogApiController {
 
     @RequestMapping("/blogMain/{blogId}")
     public String blogMain(@PathVariable int blogId, Model model) {
-        BlogVO blog = blogService.getBlog(blogId);
-        model.addAttribute("blog", blog);
-        List<CategoryVO> categoryList = categoryService.getCategoryList(blog);
-        model.addAttribute("categoryList", categoryList);
+        blogService.forwardBlogView(blogId, model);
         return "forward:/blogMainView";
     }
 
     @RequestMapping("/blogAdmin/{blogId}")
-    public String blogAdmin(@PathVariable int blogId,
-                            HttpSession session, Model model) {
-        UserVO user = (UserVO) session.getAttribute("user");
-        BlogVO blog = blogService.getBlog(user.getUserId());
-        model.addAttribute("blog", blog);
+    public String blogAdmin(@PathVariable int blogId, Model model) {
+        blogService.forwardBlogView(blogId, model);
         return "forward:/blogAdminView";
     }
 
