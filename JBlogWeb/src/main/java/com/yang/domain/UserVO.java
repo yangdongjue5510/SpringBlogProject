@@ -6,11 +6,6 @@ import java.util.Date;
 
 @Data
 public class UserVO {
-
-    /*
-    PK = userId
-    FK = blogName
-     */
     private int userId;
     private String id;
     private String userName;

@@ -44,9 +44,18 @@
             </tr>
             <tr>
                 <td height="20" colspan="10" align="center" class="tdcontent">
-                    <input type="radio" name="searchCondition" value="TITLE" checked="checked">블로그 제목&nbsp;&nbsp;
-                    <input type="radio" name="searchCondition" value="TAG">태그&nbsp;&nbsp;
-                    <input type="radio" name="searchCondition" value="USER_NAME">블로거
+                    <input type="radio" name="searchCondition" value="TITLE"
+                    <c:if test="${searchCondtion == null or searchCondition eq 'TITLE'}">
+                           checked="checked"
+                    </c:if>>블로그 제목
+                    <input type="radio" name="searchCondition" value="TAG"
+                    <c:if test="${searchCondition eq 'TAG'}">
+                           checked="checked"
+                    </c:if>>태그&nbsp;&nbsp;
+                    <input type="radio" name="searchCondition" value="USER_NAME"
+                    <c:if test="${searchCondition eq 'USER_NAME'}">
+                           checked="checked"
+                    </c:if>>블로거
                 </td>
             </tr>
         </table>
@@ -69,11 +78,13 @@
                 <tr>
                     <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/blogMain/${blog.blogId}">${blog.title}</a></td>
                     <td class="tablecontent" align="center">${blog.userId}</td>
-                    <td class="tablecontent" align="center"><img height="32" src="static/images/j2eelogo.jpg" border="0"></td>
+                    <td class="tablecontent" align="center"><img height="32" src="static/images/j2eelogo.jpg"
+                                                                 border="0"></td>
                     <td class="tablecontent" align="center">${blog.status}</td>
                     <td class="tablecontent" align="center">
                         <c:if test="${user.role eq 'ADMIN'}">
-                            <a href="/deleteBlog/${blog.blogId}"><img height="9" src="static/images/delete.jpg" border="0"></a>
+                            <a href="/deleteBlog/${blog.blogId}"><img height="9" src="static/images/delete.jpg"
+                                                                      border="0"></a>
                         </c:if>
                     </td>
                 </tr>

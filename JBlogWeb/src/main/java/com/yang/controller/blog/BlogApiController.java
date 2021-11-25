@@ -1,21 +1,18 @@
 package com.yang.controller.blog;
 
 import com.yang.domain.BlogVO;
-import com.yang.domain.CategoryVO;
 import com.yang.domain.UserVO;
 import com.yang.service.BlogService;
 import com.yang.service.CategoryService;
 import com.yang.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -49,12 +46,10 @@ public class BlogApiController {
             blogList = blogService.searchBlog(searchCondition, searchKeyword);
         }
         else if (searchCondition.equals("USER_NAME")) {
-            List<UserVO> userList = userService.searchUserByUserName(searchKeyword);
-            blogList = userList.stream()
-                    .map(user -> blogService.getBlog(user.getUserId()))
-                    .collect(Collectors.toList());
+            blogList = blogService.searchBlogByUserName(searchKeyword);
         }
         model.addAttribute("blogList", blogList);
+        model.addAttribute("searchCondition", searchCondition);
         return "forward:/indexView";
     }
 

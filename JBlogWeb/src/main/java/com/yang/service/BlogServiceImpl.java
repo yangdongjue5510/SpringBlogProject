@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BlogServiceImpl implements BlogService{
@@ -55,8 +56,14 @@ public class BlogServiceImpl implements BlogService{
 
     @Override
     public List<BlogVO> searchBlog(String searchCondition, String searchKeyword) {
-        List<BlogVO> blogList = blogDAO.searchBlog(searchCondition, searchKeyword);
-        return blogList;
+        return blogDAO.searchBlog(searchCondition, searchKeyword);
+
+    }
+
+    public List<BlogVO> searchBlogByUserName(String searchKeyword) {
+        return userDAO.searchUserByUserName(searchKeyword).stream()
+                .map(user -> blogDAO.getBlog(user.getUserId()))
+                .collect(Collectors.toList());
     }
 
     @Override
