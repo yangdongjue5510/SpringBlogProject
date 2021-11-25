@@ -78,6 +78,12 @@ class JBlogWebApplicationTests {
     }
 
     @Test
+    void searchBlogUserName() {
+        List<BlogVO> list = blogService.searchBlogByUserName("관리자");
+        assertEquals(1, list.size());
+    }
+
+    @Test
     void deleteBlog() {
         blogService.deleteBlog(2);
         assertEquals(1, blogService.getBlogList().size());
