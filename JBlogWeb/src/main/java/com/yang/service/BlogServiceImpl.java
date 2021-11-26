@@ -2,6 +2,7 @@ package com.yang.service;
 
 import com.yang.db.BlogDAO;
 import com.yang.db.CategoryDAO;
+import com.yang.db.PostDAO;
 import com.yang.db.UserDAO;
 import com.yang.domain.BlogVO;
 import com.yang.domain.CategoryVO;
@@ -24,10 +25,14 @@ public class BlogServiceImpl implements BlogService{
     CategoryDAO categoryDAO;
 
     @Autowired
+    PostDAO postDAO;
+
+    @Autowired
     PostService postService;
 
     @Autowired
     UserDAO userDAO;
+
 
 
     @Override
@@ -82,19 +87,11 @@ public class BlogServiceImpl implements BlogService{
         UserVO blogWriter = userDAO.getUserByBlogId(blogId);
         CategoryVO category = (CategoryVO) model.getAttribute("category");
 
-        List<PostVO> postList = null;
-        if (category == null) {
-            postList = postService.getPost(blogId);
-        }
-        else if (category.getCategoryName() != null) {
-            postList = postService.getPostByCategoryId(category.getCategoryId());
-        }
+        List<PostVO> postList = postService.getPostListBySearch(blogId, category);
 
         model.addAttribute("blogWriter", blogWriter);
         model.addAttribute("blog", blog);
         model.addAttribute("categoryList", categoryDAO.getCategoryList(blog));
         model.addAttribute("postList", postList);
     }
-
-
 }

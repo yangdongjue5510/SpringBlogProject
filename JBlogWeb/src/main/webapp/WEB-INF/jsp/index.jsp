@@ -77,7 +77,11 @@
 
                 <tr>
                     <td class="tablecontent">&nbsp;&nbsp;&nbsp;<a href="/blogMain/${blog.blogId}">${blog.title}</a></td>
-                    <td class="tablecontent" align="center">${blog.userId}</td>
+                    <c:forEach var="blogUser" items="${userList}">
+                        <c:if test="${blogUser.userId eq blog.blogId}">
+                            <td class="tablecontent" align="center">${blogUser.userName}</td>
+                        </c:if>
+                    </c:forEach>
                     <td class="tablecontent" align="center"><img height="32" src="static/images/j2eelogo.jpg"
                                                                  border="0"></td>
                     <td class="tablecontent" align="center">${blog.status}</td>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -31,9 +32,12 @@ public class BlogApiController {
     public String index(Model model) {
         if (model.getAttribute("blogList") == null){
             List<BlogVO> list = blogService.getBlogList();
-            // todo. 유저이름으로 표기하기
             model.addAttribute("blogList", list);
         }
+        List<BlogVO> blogList = (List<BlogVO>) model.getAttribute("blogList");
+        List<UserVO> userList = blogList.stream().map(blog -> userService.getUserByBlogId(blog.getBlogId()))
+                .collect(Collectors.toList());
+        model.addAttribute("userList", userList);
         return "forward:/indexView";
     }
 

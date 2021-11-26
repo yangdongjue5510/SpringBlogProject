@@ -1,8 +1,10 @@
 package com.yang.service;
 
 import com.yang.db.CategoryDAO;
+import com.yang.db.PostDAO;
 import com.yang.domain.BlogVO;
 import com.yang.domain.CategoryVO;
+import com.yang.domain.PostVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Autowired
     CategoryDAO categoryDAO;
+
+    @Autowired
+    PostDAO postDAO;
 
     @Override
     public void insertCategory(CategoryVO vo) {
@@ -38,4 +43,6 @@ public class CategoryServiceImpl implements CategoryService{
     public CategoryVO getCategory(int categoryId) {
         return categoryDAO.getCategory(categoryId);
     }
+
+
 }
