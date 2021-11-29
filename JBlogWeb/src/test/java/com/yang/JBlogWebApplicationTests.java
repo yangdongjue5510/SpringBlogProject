@@ -38,11 +38,6 @@ class JBlogWebApplicationTests {
         assertNotNull(user);
     }
 
-    @Test
-    void getBlogList() {
-        List<BlogVO> list = blogService.getBlogList();
-        assertEquals(1, list.size());
-    }
 
     @Test
     void getBlog() {
@@ -71,11 +66,6 @@ class JBlogWebApplicationTests {
 
     }
 
-    @Test
-    void searchBlogTitle() {
-        List<BlogVO> list = blogService.searchBlog("TITLE", "test");
-        assertEquals(2, list.size());
-    }
 
     @Test
     void searchBlogUserName() {
@@ -89,20 +79,6 @@ class JBlogWebApplicationTests {
         assertEquals(1, blogService.getBlogList().size());
     }
 
-    @Test
-    void getCategoryList() {
-        BlogVO blogVO = new BlogVO();
-        blogVO.setBlogId(1);
-        List<CategoryVO> categoryList = categoryService.getCategoryList(blogVO);
-        assertEquals(1, categoryList.size());
-    }
-
-    @Test
-    void getCategory() {
-        CategoryVO category = categoryService.getCategory(2);
-        int blogId = category.getBlogId();
-        assertEquals(2, blogId);
-    }
 
     @Test
     void insertPost() {
@@ -113,15 +89,4 @@ class JBlogWebApplicationTests {
         postService.insertPost(post);
     }
 
-    @Test
-    void getPostTest(){
-        List<PostVO> post = postService.getPost(2);
-        assertEquals(1,post.size());
-    }
-
-    @Test
-    void getPostByCategoryIdTest(){
-        List<PostVO> post = postService.getPostByCategoryId(2);
-        assertEquals(2,post.size());
-    }
 }

@@ -84,14 +84,11 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void forwardBlogView(int blogId, Model model) {
         BlogVO blog = getBlog(blogId);
-        UserVO blogWriter = userDAO.getUserByBlogId(blogId);
         CategoryVO category = (CategoryVO) model.getAttribute("category");
 
-        List<PostVO> postList = postService.getPostListBySearch(blogId, category);
-
-        model.addAttribute("blogWriter", blogWriter);
+        model.addAttribute("blogWriter", userDAO.getUserByBlogId(blogId));
         model.addAttribute("blog", blog);
         model.addAttribute("categoryList", categoryDAO.getCategoryList(blog));
-        model.addAttribute("postList", postList);
+        model.addAttribute("postList", postService.getPostListBySearch(blogId, category));
     }
 }
